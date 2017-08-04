@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="hotelMappingCache" class="com.derbysoft.ccs.core.MappingCache">
+        <constructor-arg index="0" value="dwplatform_hotel_mapping"/>
+        <constructor-arg index="1" value="com.derbysoft.doorway.domain.model.mapping.HotelMapping"/>
+    </bean>
+
+    <bean id="ratePlanMappingCache" class="com.derbysoft.ccs.core.MappingCache">
+        <constructor-arg index="0" value="dwplatform_rateplan_mapping"/>
+        <constructor-arg index="1" value="com.derbysoft.doorway.domain.model.mapping.RatePlanMapping"/>
+    </bean>
+
+    <bean id="roomTypeMappingCache" class="com.derbysoft.ccs.core.MappingCache">
+        <constructor-arg index="0" value="dwplatform_roomtype_mapping"/>
+        <constructor-arg index="1" value="com.derbysoft.doorway.domain.model.mapping.RoomTypeMapping"/>
+    </bean>
+
+    <bean id="ratePlanCache" class="com.derbysoft.ccs.core.MappingCache">
+        <constructor-arg index="0" value="dwplatform_rateplan_info"/>
+        <constructor-arg index="1" value="com.derbysoft.doorway.domain.model.mapping.RatePlanInfo"/>
+    </bean>
+
+    <bean id="roomTypeCache" class="com.derbysoft.ccs.core.MappingCache">
+        <constructor-arg index="0" value="dwplatform_roomtype_info"/>
+        <constructor-arg index="1" value="com.derbysoft.doorway.domain.model.mapping.RoomTypeInfo"/>
+        <property name="getOnly" value="true"/>
+    </bean>
+
+    <bean id="accountCache" class="com.derbysoft.ccs.core.MappingCache">
+        <constructor-arg index="0" value="dwplatform_account"/>
+        <constructor-arg index="1" value="com.derbysoft.doorway.domain.model.mapping.Account"/>
+    </bean>
+
+    <bean id="channelProviderConfigCache" class="com.derbysoft.ccs.core.MappingCache">
+        <constructor-arg index="0" value="dwplatform_channel_provider_config"/>
+        <constructor-arg index="1" value="com.derbysoft.doorway.domain.model.mapping.ChannelProviderConfig"/>
+    </bean>
+
+    <bean class="com.derbysoft.ccs.core.TopicConsumer">
+        <constructor-arg index="0" value="${ccs.consumer.id}"/>
+        <constructor-arg index="1" value="${ccs.zookeeper.connect}"/>
+        <constructor-arg index="2" value="${ccs.cache.file.dir}"/>
+        <constructor-arg index="3" value="${ccs.url}"/>
+        <constructor-arg index="4">
+            <list>
+                <ref bean="hotelMappingCache"/>
+                <ref bean="ratePlanMappingCache"/>
+                <ref bean="roomTypeMappingCache"/>
+                <ref bean="ratePlanCache"/>
+                <ref bean="roomTypeCache"/>
+                <ref bean="accountCache"/>
+                <ref bean="channelProviderConfigCache"/>
+            </list>
+        </constructor-arg>
+        <constructor-arg index="5" value="300000"/>
+    </bean>
+
+</beans>

@@ -1,3 +1,5 @@
+package com.rusher.interfaces;
+
 /**
  * Created by liam on 03/08/2017.
  */
