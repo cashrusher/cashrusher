@@ -1,10 +1,11 @@
 <configuration debug="false" scan="true">
     <property resource="logback-kafka.properties"/>
-
+    <appender name="NO_LOG" class="ch.qos.logback.core.helpers.NOPAppender">
+    </appender>
     <appender name="APP_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/usr/local/logs/goplatform.log</file>
+        <file>/usr/local/logs/cashrusher.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/usr/local/logs/goplatform.log.%d{yyyy-MM-dd,GMT}.log.zip</fileNamePattern>
+            <fileNamePattern>/usr/local/logs/cashrusher.log.%d{yyyy-MM-dd,GMT}.log.zip</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>512000KB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -14,69 +15,11 @@
         </encoder>
     </appender>
 
-    <appender name="PERF_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/usr/local/logs/goplatform.perf.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/usr/local/logs/goplatform.perf.log.%d{yyyy-MM-dd,GMT}.log.zip</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>512000KB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSS,GMT} %m%n</pattern>
-        </encoder>
-    </appender>
-
-    <appender name="STREAM_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>/usr/local/logs/goplatform.stream.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/usr/local/logs/goplatform.stream.log.%d{yyyy-MM-dd,GMT}.log.zip</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>512000KB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSS,GMT} %m%n</pattern>
-        </encoder>
-    </appender>
-
-    <appender name="PERF_KAFKA" class="com.derby.nuke.common.module.kafka.appender.logback.KafkaLogbackAppender">
-        <applicationName>${appName}</applicationName>
-        <host>${host}</host>
-        <ip>${ip}</ip>
-        <type>${perfType}</type>
-        <topicName>${perfTopicName}</topicName>
-        <kafkaServerId>${perfKafkaName}</kafkaServerId>
-    </appender>
-
-    <appender name="STREAM_KAFKA" class="com.derby.nuke.common.module.kafka.appender.logback.KafkaLogbackAppender">
-        <applicationName>${appName}</applicationName>
-        <host>${host}</host>
-        <ip>${ip}</ip>
-        <type>${streamType}</type>
-        <topicName>${streamTopicName}</topicName>
-        <kafkaServerId>${streamKafkaName}</kafkaServerId>
-    </appender>
-
     <root level="INFO">
         <appender-ref ref="APP_LOG"/>
     </root>
 
-    <logger name="PERF_LOG" level="INFO" additivity="false">
-        <appender-ref ref="PERF_FILE"/>
-        <appender-ref ref="PERF_KAFKA"/>
-    </logger>
-
-    <logger name="STREAM_LOG" level="INFO" additivity="false">
-        <appender-ref ref="STREAM_FILE"/>
-        <appender-ref ref="STREAM_KAFKA"/>
-    </logger>
-
-    <logger name="com.derbysoft" level="INFO" additivity="false">
-        <appender-ref ref="APP_LOG"/>
-    </logger>
-
-    <logger name="com.derby.nuke" level="INFO" additivity="false">
+    <logger name="com.cashrusher" level="INFO" additivity="false">
         <appender-ref ref="APP_LOG"/>
     </logger>
 </configuration>

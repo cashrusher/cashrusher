@@ -28,9 +28,9 @@
         <property name="namingStrategy">
             <bean class="org.hibernate.cfg.ImprovedNamingStrategy"/>
         </property>
-        <property name="entityInterceptor">
-            <bean class="com.derbysoft.common.hibernate.PersistenceSupportHibernateInterceptor"/>
-        </property>
+        <!--<property name="entityInterceptor">-->
+            <!--<bean class="com.derbysoft.common.hibernate.PersistenceSupportHibernateInterceptor"/>-->
+        <!--</property>-->
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
@@ -43,12 +43,12 @@
         </property>
         <property name="packagesToScan">
             <list>
-                <value>com.derbysoft.doorway.domain.model.db</value>
+                <value>com.rusher.domain.model.db</value>
             </list>
         </property>
     </bean>
 
-    <bean id="commonRepository" class="com.derbysoft.common.repository.CommonRepository">
+    <bean id="commonRepository" class="com.rusher.domain.common.repository.CommonRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
