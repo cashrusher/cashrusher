@@ -1,5 +1,9 @@
 package com.rusher.domain.common.ws;
 
+import com.rusher.domain.common.exception.HttpErrorException;
+import com.rusher.domain.common.exception.MessageUnmarshalException;
+import com.rusher.domain.common.http.HttpStatusCodes;
+
 public class WebServiceHttpAccessor extends WebServiceAccessor {
     private final WebServiceMessageHttpSender sender;
 //    private HttpErrorUnmarshaller httpErrorUnmarshaller;
@@ -13,20 +17,20 @@ public class WebServiceHttpAccessor extends WebServiceAccessor {
 //        this.httpErrorUnmarshaller = httpErrorUnmarshaller;
 //    }
 
-//    @Override
-//    protected <RS> RS unmarshal(String rsMessage) {
-//        final int responseCode = sender.getResponseCode();
+    @Override
+    protected <RS> RS unmarshal(String rsMessage) {
+        final int responseCode = sender.getResponseCode();
 //        if (responseCode != HttpStatusCodes.SUCCESS && httpErrorUnmarshaller != null) {
 //            return (RS) httpErrorUnmarshaller.unmarshal(responseCode, rsMessage);
 //        }
-//
-//        try {
-//            return super.unmarshal(rsMessage);
-//        } catch (MessageUnmarshalException e) {
-//            if (responseCode != HttpStatusCodes.SUCCESS) {
-//                throw new HttpErrorException(responseCode, rsMessage);
-//            }
-//            throw e;
-//        }
-//    }
+
+        try {
+            return super.unmarshal(rsMessage);
+        } catch (MessageUnmarshalException e) {
+            if (responseCode != HttpStatusCodes.SUCCESS) {
+                throw new HttpErrorException(responseCode, rsMessage);
+            }
+            throw e;
+        }
+    }
 }
