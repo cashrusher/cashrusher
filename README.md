@@ -13,3 +13,8 @@
   </mirrors>
 
 ```
+
+2. Client for YunBi
+
+https://github.com/peatio/peatio-client-java.git
+
