@@ -1,7 +1,7 @@
 package com.rusher.interfaces.service;
 
 import com.rusher.domain.protocol.Account;
-import com.rusher.domain.protocol.AppAccount;
+import com.rusher.domain.protocol.AuthorizationKey;
 import com.rusher.interfaces.YunBiAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,24 +13,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountService {
 
+
     @Autowired
     private YunBiAPIService yunbiAPI;
 
     private final String accessKey = "WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt";
     private final String secretKey = "v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt";
 
-    public AppAccount createAccount() {
-        AppAccount appAccount = new AppAccount();
-        appAccount.setId(1L);
-        appAccount.setAccessKey(accessKey); //
-        appAccount.setSecretKey(secretKey); //
-        return appAccount;
+    private AuthorizationKey getAuthorizationKey() {
+        AuthorizationKey authorizationKey = new AuthorizationKey();
+        authorizationKey.setId(1L);
+        authorizationKey.setAccessKey(accessKey); //
+        authorizationKey.setSecretKey(secretKey); //
+        return authorizationKey;
     }
 
-    public AppAccount getAccountAssert() {
-        Account account = yunbiAPI.getAccount();
-
-        return null;
+    public Account getAccount() {
+        Account account = yunbiAPI.getAccount(getAuthorizationKey());
+        return account;
     }
 
+    public YunBiAPIService getYunbiAPI() {
+        return yunbiAPI;
+    }
+
+    public void setYunbiAPI(YunBiAPIService yunbiAPI) {
+        this.yunbiAPI = yunbiAPI;
+    }
 }

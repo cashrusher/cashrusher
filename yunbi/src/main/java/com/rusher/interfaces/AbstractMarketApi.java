@@ -36,34 +36,34 @@ public abstract class AbstractMarketApi {
         this.init_depth();
     }
 
-    public Long buy(AppAccount appAccount, double amount, double price, SymbolPair symbolPair) {
-        return buy(appAccount, amount, price, symbolPair, OrderType.Limit);
+    public Long buy(AuthorizationKey authorizationKey, double amount, double price, SymbolPair symbolPair) {
+        return buy(authorizationKey, amount, price, symbolPair, OrderType.Limit);
     }
 
-    public abstract Long buy(AppAccount appAccount, double amount, double price, SymbolPair symbolPair, OrderType orderType);
+    public abstract Long buy(AuthorizationKey authorizationKey, double amount, double price, SymbolPair symbolPair, OrderType orderType);
 
-    public Long sell(AppAccount appAccount, double amount, double price, SymbolPair symbolPair) {
-        return sell(appAccount, amount, price, symbolPair, OrderType.Limit);
+    public Long sell(AuthorizationKey authorizationKey, double amount, double price, SymbolPair symbolPair) {
+        return sell(authorizationKey, amount, price, symbolPair, OrderType.Limit);
     }
 
-    public abstract Long sell(AppAccount appAccount, double amount, double price, SymbolPair symbolPair, OrderType orderType);
+    public abstract Long sell(AuthorizationKey authorizationKey, double amount, double price, SymbolPair symbolPair, OrderType orderType);
 
-    public abstract void cancel(AppAccount appAccount, Long orderId, SymbolPair symbolPair);
+    public abstract void cancel(AuthorizationKey authorizationKey, Long orderId, SymbolPair symbolPair);
 
-    public Long replace(AppAccount appAccount, Long orderId, double amount, double price, OrderSide orderSide, SymbolPair symbolPair, OrderType orderType) {
-        cancel(appAccount, orderId, symbolPair);
+    public Long replace(AuthorizationKey authorizationKey, Long orderId, double amount, double price, OrderSide orderSide, SymbolPair symbolPair, OrderType orderType) {
+        cancel(authorizationKey, orderId, symbolPair);
         if (OrderSide.buy.equals(orderSide)) {
-            return buy(appAccount, amount, price, symbolPair, orderType);
+            return buy(authorizationKey, amount, price, symbolPair, orderType);
         } else if (OrderSide.sell.equals(orderSide)) {
-            return sell(appAccount, amount, price, symbolPair, orderType);
+            return sell(authorizationKey, amount, price, symbolPair, orderType);
         }
-        LOG.error("appAccount:{} orderId:{} amount:{} price:{} side:{} pair:{}", appAccount, orderId,
+        LOG.error("authorizationKey:{} orderId:{} amount:{} price:{} side:{} pair:{}", authorizationKey, orderId,
                 amount, price, orderSide, symbolPair);
         throw new RuntimeException("replace error orderSide error:" + orderSide);
     }
 
-    public Long replace(AppAccount appAccount, Long orderId, double amount, double price, OrderSide orderSide, SymbolPair symbolPair) {
-        return replace(appAccount, orderId, amount, price, orderSide, symbolPair, OrderType.Limit);
+    public Long replace(AuthorizationKey authorizationKey, Long orderId, double amount, double price, OrderSide orderSide, SymbolPair symbolPair) {
+        return replace(authorizationKey, orderId, amount, price, orderSide, symbolPair, OrderType.Limit);
     }
 
     public JSONObject get_depth(SymbolPair symbolPair, boolean force_update) {
@@ -173,7 +173,7 @@ public abstract class AbstractMarketApi {
     public abstract JSONObject update_depth(SymbolPair symbol);
 
 
-    public abstract Account getAccount();
+    public abstract Account getAccount(AuthorizationKey key);
 
     public abstract List<Kline> getKlineDate(Symbol symbol) throws IOException, ParseException;
 
@@ -187,9 +187,9 @@ public abstract class AbstractMarketApi {
 
     public abstract Double ticker(SymbolPair symbol) throws IOException;
 
-    public abstract BitOrder getOrder(AppAccount appAccount, Long orderId, SymbolPair symbolPair);
+    public abstract BitOrder getOrder(AuthorizationKey authorizationKey, Long orderId, SymbolPair symbolPair);
 
-    public abstract List<BitOrder> getRunningOrders(AppAccount appAccount);
+    public abstract List<BitOrder> getRunningOrders(AuthorizationKey authorizationKey);
 
     Long createNonce() {
         return System.currentTimeMillis() / 1000;

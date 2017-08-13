@@ -11,12 +11,10 @@ import com.rusher.domain.utils.MarketErrorCode;
 import com.rusher.domain.utils.MarketUtils;
 import com.rusher.domain.utils.TradeException;
 import com.rusher.interfaces.exception.AccountException;
-import com.rusher.interfaces.service.AccountService;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Mac;
@@ -29,10 +27,6 @@ import java.util.*;
 @Service
 public class YunBiAPIService extends AbstractMarketApi {
     private static final Logger LOG = LoggerFactory.getLogger(YunBiAPIService.class);
-
-    @Autowired
-    private AccountService accountService;
-
     private static final String PEATIO_URL = "https://yunbi.com";
     private static final long DURATION = 1000;
     private static final int TIME_OUT = 15000;
@@ -47,12 +41,12 @@ public class YunBiAPIService extends AbstractMarketApi {
     }
 
     @Override
-    public Long buy(AppAccount appAccount, double amount, double price, SymbolPair symbolPair, OrderType orderType) {
+    public Long buy(AuthorizationKey authorizationKey, double amount, double price, SymbolPair symbolPair, OrderType orderType) {
 
         price = FiatConverter.toCNY(price);
         TreeMap<String, String> params = new TreeMap<String, String>();
         params.put("side", "buy");
-        JSONObject response = trade(appAccount, amount, price, params, symbolPair, orderType);
+        JSONObject response = trade(authorizationKey, amount, price, params, symbolPair, orderType);
         if (response.containsKey("id")) {
             return response.getLong("id");
         }
@@ -60,25 +54,25 @@ public class YunBiAPIService extends AbstractMarketApi {
     }
 
     @Override
-    public Long sell(AppAccount appAccount, double amount, double price, SymbolPair symbolPair, OrderType orderType) {
+    public Long sell(AuthorizationKey authorizationKey, double amount, double price, SymbolPair symbolPair, OrderType orderType) {
         price = FiatConverter.toCNY(price);
         TreeMap<String, String> params = new TreeMap<String, String>();
         params.put("side", "sell");
-        JSONObject response = trade(appAccount, amount, price, params, symbolPair, orderType);
+        JSONObject response = trade(authorizationKey, amount, price, params, symbolPair, orderType);
         if (response.containsKey("id")) {
             return response.getLong("id");
         }
         return -1L;
     }
 
-    private JSONObject trade(AppAccount appAccount, Double amount, Double price, TreeMap<String, String> params, SymbolPair symbolPair, OrderType orderType) {
+    private JSONObject trade(AuthorizationKey authorizationKey, Double amount, Double price, TreeMap<String, String> params, SymbolPair symbolPair, OrderType orderType) {
         /*if (AppConfig.isDebug()) { todo
             LOG.info("AppConfig is debug,can't trade at peatio");
             return new JSONObject();
         }*/
 
-        if (!appAccount.getEnable()) {
-            LOG.info("appAccount is disable {}", appAccount);
+        if (!authorizationKey.getEnable()) {
+            LOG.info("authorizationKey is disable {}", authorizationKey);
             return new JSONObject();
         }
 
@@ -91,7 +85,7 @@ public class YunBiAPIService extends AbstractMarketApi {
         params.put("market", getSymbolPairDescFromUsd2Cny(symbolPair));
         params.put("canonical_verb", "POST");
         params.put("canonical_uri", "/api/v2/orders");
-        JSONObject response = send_request(appAccount, params, TIME_OUT, false);
+        JSONObject response = send_request(authorizationKey, params, TIME_OUT, false);
         if (response.containsKey("error")) {
             throw new TradeException(MarketErrorCode.getForPeatioCNY(response));
         }
@@ -99,7 +93,7 @@ public class YunBiAPIService extends AbstractMarketApi {
     }
 
     @Override
-    public void cancel(AppAccount appAccount, Long orderId, SymbolPair symbolPair) {
+    public void cancel(AuthorizationKey authorizationKey, Long orderId, SymbolPair symbolPair) {
         /*if (AppConfig.isDebug()) { todo
                     LOG.info("AppConfig is debug,can't cancel at peatio");
 
@@ -111,7 +105,7 @@ public class YunBiAPIService extends AbstractMarketApi {
         params.put("canonical_verb", "POST");
         params.put("canonical_uri", "/api/v2/order/delete");
 
-        JSONObject response = send_request(appAccount, params, TIME_OUT, true);
+        JSONObject response = send_request(authorizationKey, params, TIME_OUT, true);
         if (response.containsKey("error")) {
             throw new TradeException(MarketErrorCode.getForPeatioCNY(response));
         }
@@ -143,13 +137,12 @@ public class YunBiAPIService extends AbstractMarketApi {
     }
 
     @Override
-    public Account getAccount() {
-        AppAccount appAccount = accountService.createAccount();
+    public Account getAccount(AuthorizationKey key) {
         TreeMap<String, String> params = new TreeMap<String, String>();
         try {
             params.put("canonical_verb", "GET");
             params.put("canonical_uri", "/api/v2/members/me.json");
-            JSONObject response = send_request(appAccount, params, TIME_OUT, true);
+            JSONObject response = send_request(key, params, TIME_OUT, true);
             if (response == null) {
                 throw new AccountException("Can not get account information.");
             }
@@ -160,24 +153,24 @@ public class YunBiAPIService extends AbstractMarketApi {
     }
 
     @Override
-    public BitOrder getOrder(AppAccount appAccount, Long orderId, SymbolPair symbolPair) {
+    public BitOrder getOrder(AuthorizationKey authorizationKey, Long orderId, SymbolPair symbolPair) {
         TreeMap<String, String> params = new TreeMap<String, String>();
         params.put("canonical_verb", "GET");
         params.put("canonical_uri", "/api/v2/order");
         params.put("id", orderId.toString());
-        JSONObject response = send_request(appAccount, params, TIME_OUT, true);
+        JSONObject response = send_request(authorizationKey, params, TIME_OUT, true);
         return getOrder(response);
     }
 
     @Override
-    public List<BitOrder> getRunningOrders(AppAccount appAccount) {
+    public List<BitOrder> getRunningOrders(AuthorizationKey authorizationKey) {
         TreeMap<String, String> params = new TreeMap<String, String>();
         params.put("canonical_verb", "GET");
         params.put("canonical_uri", "/api/v2/orders");
         params.put("market", getSymbolPairDescFromUsd2Cny(new SymbolPair(Symbol.btc, Symbol.cny)));
         params.put("limit", "100");
         List<BitOrder> orders = new ArrayList<BitOrder>();
-        JSONArray ordersResponse = send_requests(appAccount, params, TIME_OUT, true);
+        JSONArray ordersResponse = send_requests(authorizationKey, params, TIME_OUT, true);
         for (Object anOrdersResponse : ordersResponse) {
             JSONObject orderResponse = (JSONObject) anOrdersResponse;
             orders.add(getOrder(orderResponse));
@@ -210,7 +203,7 @@ public class YunBiAPIService extends AbstractMarketApi {
         return bitOrder;
     }
 
-    private String getSign(AppAccount appAccount, TreeMap<String, String> parameters) {
+    private String getSign(AuthorizationKey authorizationKey, TreeMap<String, String> parameters) {
         if (parameters.containsKey("signature")) {
             parameters.remove("signature");
         }
@@ -232,7 +225,7 @@ public class YunBiAPIService extends AbstractMarketApi {
         String signStr = String.format("%s|%s|%s", canonical_verb, canonical_uri, parameter.toString());
         try {
             Mac mac = Mac.getInstance("HmacSHA256");
-            SecretKeySpec keyspec = new SecretKeySpec(appAccount.getSecretKey().getBytes("UTF-8"), "HmacSHA256");
+            SecretKeySpec keyspec = new SecretKeySpec(authorizationKey.getSecretKey().getBytes("UTF-8"), "HmacSHA256");
             mac.init(keyspec);
             mac.update(signStr.getBytes("UTF-8"));
             return String.format("%064x", new BigInteger(1, mac.doFinal()));
@@ -241,7 +234,7 @@ public class YunBiAPIService extends AbstractMarketApi {
         }
     }
 
-    private String internal_send_request(AppAccount appAccount, TreeMap<String, String> params, int timeout) {
+    private String internal_send_request(AuthorizationKey authorizationKey, TreeMap<String, String> params, int timeout) {
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastUpdate < DURATION) {
             try {
@@ -250,10 +243,10 @@ public class YunBiAPIService extends AbstractMarketApi {
                 // ignore
             }
         }
-        params.put("access_key", appAccount.getAccessKey());
+        params.put("access_key", authorizationKey.getAccessKey());
         params.put("tonce", createNonce().toString());
 
-        params.put("signature", getSign(appAccount, params));
+        params.put("signature", getSign(authorizationKey, params));
 
         String canonical_verb = params.get("canonical_verb");
         params.remove("canonical_verb");
@@ -282,8 +275,8 @@ public class YunBiAPIService extends AbstractMarketApi {
         }
     }
 
-    private JSONObject send_request(AppAccount appAccount, TreeMap<String, String> params, int timeout, boolean isThrow) {
-        String body = internal_send_request(appAccount, params, timeout);
+    private JSONObject send_request(AuthorizationKey authorizationKey, TreeMap<String, String> params, int timeout, boolean isThrow) {
+        String body = internal_send_request(authorizationKey, params, timeout);
         JSONObject response = JSON.parseObject(body);
         if (response == null) {
             throw new RuntimeException("send_request response is null");
@@ -295,8 +288,8 @@ public class YunBiAPIService extends AbstractMarketApi {
     }
 
 
-    private JSONArray send_requests(AppAccount appAccount, TreeMap<String, String> params, int timeout, boolean isThrow) {
-        String body = internal_send_request(appAccount, params, timeout);
+    private JSONArray send_requests(AuthorizationKey authorizationKey, TreeMap<String, String> params, int timeout, boolean isThrow) {
+        String body = internal_send_request(authorizationKey, params, timeout);
         JSONArray response = JSONObject.parseArray(body);
         if (response == null) {
             throw new RuntimeException("send_request response is null");

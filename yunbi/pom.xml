@@ -178,7 +178,7 @@
             <url>https://repo.maven.apache.org/maven2</url>
             <layout>default</layout>
             <snapshots>
-                <enabled>false</enabled>
+                <enable>false</enable>
             </snapshots>
         </repository>
     </repositories>
@@ -190,7 +190,7 @@
             <url>https://repo.maven.apache.org/maven2</url>
             <layout>default</layout>
             <snapshots>
-                <enabled>false</enabled>
+                <enable>false</enable>
             </snapshots>
             <releases>
                 <updatePolicy>never</updatePolicy>

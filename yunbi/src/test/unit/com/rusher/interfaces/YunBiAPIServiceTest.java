@@ -8,14 +8,15 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.*;
+
 public class YunBiAPIServiceTest {
 
-    private AppAccount getAppAccount() {
-        AppAccount appAccount = new AppAccount();
-        appAccount.setId(1L);
-        appAccount.setAccessKey("WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt"); // todo 替换为access_key
-        appAccount.setSecretKey("v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt"); // todo 替换为secret_key
-        return appAccount;
+    private AuthorizationKey getAppAccount() {
+        AuthorizationKey authorizationKey = new AuthorizationKey();
+        authorizationKey.setId(1L);
+        authorizationKey.setAccessKey("WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt"); // todo 替换为access_key
+        authorizationKey.setSecretKey("v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt"); // todo 替换为secret_key
+        return authorizationKey;
     }
 
     @Test
@@ -56,8 +57,15 @@ public class YunBiAPIServiceTest {
 
     @Test
     public void testGetInfo() throws Exception {
+        String accessKey = "WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt";
+        String secretKey = "v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt";
+
         AbstractMarketApi market = MarketApiFactory.getInstance().getMarket(Market.PeatioCNY);
-        Account account=market.getAccount();
+        AuthorizationKey authorizationKey = new AuthorizationKey();
+        authorizationKey.setId(1L);
+        authorizationKey.setAccessKey(accessKey); //
+        authorizationKey.setSecretKey(secretKey); //
+        Account account = market.getAccount(authorizationKey);
     }
 
     @Test
