@@ -8,13 +8,13 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.*;
-public class PeatioCNYApiTest {
+public class YunBiAPIServiceTest {
 
     private AppAccount getAppAccount() {
         AppAccount appAccount = new AppAccount();
         appAccount.setId(1L);
-        appAccount.setAccessKey("xxx"); // todo 替换为access_key
-        appAccount.setSecretKey("yyy"); // todo 替换为secret_key
+        appAccount.setAccessKey("WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt"); // todo 替换为access_key
+        appAccount.setSecretKey("v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt"); // todo 替换为secret_key
         return appAccount;
     }
 
@@ -57,13 +57,11 @@ public class PeatioCNYApiTest {
     @Test
     public void testGetInfo() throws Exception {
         AbstractMarketApi market = MarketApiFactory.getInstance().getMarket(Market.PeatioCNY);
-        Asset asset = market.getInfo(getAppAccount());
-        assertNotNull(asset);
+        Account account=market.getAccount();
     }
 
     @Test
     public void testGetOrder() throws Exception {
-
         AbstractMarketApi market = MarketApiFactory.getInstance().getMarket(Market.PeatioCNY);
         Long orderId = 434669L;
         BitOrder order = market.getOrder(getAppAccount(), orderId, new SymbolPair(Symbol.btc, Symbol.usd));

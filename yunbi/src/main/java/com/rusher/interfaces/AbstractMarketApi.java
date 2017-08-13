@@ -173,7 +173,7 @@ public abstract class AbstractMarketApi {
     public abstract JSONObject update_depth(SymbolPair symbol);
 
 
-    public abstract Asset getInfo(AppAccount appAccount);
+    public abstract Account getAccount();
 
     public abstract List<Kline> getKlineDate(Symbol symbol) throws IOException, ParseException;
 

@@ -3,9 +3,9 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <!--<constant name="struts.convention.action.packages" value="com.derbysoft.doorway.interfaces.web.action"/>-->
-    <!--<constant name="struts.convention.result.path" value="/WEB-INF/page"/>-->
-    <!--<constant name="struts.convention.default.parent.package" value="doorway-default"/>-->
+    <!--<Constant name="struts.convention.action.packages" value="com.derbysoft.doorway.interfaces.web.action"/>-->
+    <!--<Constant name="struts.convention.result.path" value="/WEB-INF/page"/>-->
+    <!--<Constant name="struts.convention.default.parent.package" value="doorway-default"/>-->
 
     <!--<package name="doorway-default" extends="convention-default">-->
         <!--<interceptors>-->

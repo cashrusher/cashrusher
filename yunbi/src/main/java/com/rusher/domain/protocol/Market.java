@@ -18,6 +18,18 @@ public enum Market {
         public TimeZone getTimeZone() {
             return TimeZone.getTimeZone("GMT+8");
         }
+    },
+    ETHCNY {
+        @Override
+
+        public boolean isUsd() {
+            return false;
+        }
+
+        @Override
+        public TimeZone getTimeZone() {
+            return TimeZone.getTimeZone("GMT+8");
+        }
     };
 
     public abstract boolean isUsd();

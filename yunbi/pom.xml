@@ -11,6 +11,13 @@
     <artifactId>yunbi</artifactId>
     <packaging>pom</packaging>
     <name>yunbi</name>
+    <dependencies>
+        <dependency>
+            <groupId>cashrusher</groupId>
+            <artifactId>cashrusher-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
     <profiles>
         <profile>

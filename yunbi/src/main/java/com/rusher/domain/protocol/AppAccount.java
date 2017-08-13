@@ -1,6 +1,7 @@
 package com.rusher.domain.protocol;
 
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class AppAccount implements java.io.Serializable {
@@ -13,6 +14,7 @@ public class AppAccount implements java.io.Serializable {
     private String clientId;
     private Boolean enable = true;
     private Date createDate;
+    private List<Asset> accountAsset;
 
 
     public AppAccount() {}
@@ -97,5 +99,13 @@ public class AppAccount implements java.io.Serializable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    public List<Asset> getAccountAsset() {
+        return accountAsset;
+    }
+
+    public void setAccountAsset(List<Asset> accountAsset) {
+        this.accountAsset = accountAsset;
     }
 }

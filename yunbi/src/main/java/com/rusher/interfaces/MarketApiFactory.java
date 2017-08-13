@@ -23,7 +23,7 @@ public class MarketApiFactory {
     static Map<String, AbstractMarketApi> marketMap = new LinkedHashMap<String, AbstractMarketApi>();
 
     static {
-        AbstractMarketApi peatio = new PeatioCNYApi();
+        AbstractMarketApi peatio = new YunBiAPIService();
         marketMap.put(peatio.getMarket().name(), peatio);
     }
 

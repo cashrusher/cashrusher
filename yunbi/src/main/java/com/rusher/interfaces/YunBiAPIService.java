@@ -10,10 +10,14 @@ import com.rusher.domain.protocol.*;
 import com.rusher.domain.utils.MarketErrorCode;
 import com.rusher.domain.utils.MarketUtils;
 import com.rusher.domain.utils.TradeException;
+import com.rusher.interfaces.exception.AccountException;
+import com.rusher.interfaces.service.AccountService;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -22,15 +26,18 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.*;
 
+@Service
+public class YunBiAPIService extends AbstractMarketApi {
+    private static final Logger LOG = LoggerFactory.getLogger(YunBiAPIService.class);
 
-public class PeatioCNYApi extends AbstractMarketApi {
-    private static final Logger LOG = LoggerFactory.getLogger(PeatioCNYApi.class);
+    @Autowired
+    private AccountService accountService;
 
-    private static final String PEATIO_URL = "https://peatio.com";
+    private static final String PEATIO_URL = "https://yunbi.com";
     private static final long DURATION = 1000;
     private static final int TIME_OUT = 15000;
 
-    public PeatioCNYApi() {
+    public YunBiAPIService() {
         super(com.rusher.domain.protocol.Currency.CNY, Market.PeatioCNY);
     }
 
@@ -135,47 +142,21 @@ public class PeatioCNYApi extends AbstractMarketApi {
         return 0.0;
     }
 
-
     @Override
-    public Asset getInfo(AppAccount appAccount) {
-
+    public Account getAccount() {
+        AppAccount appAccount = accountService.createAccount();
         TreeMap<String, String> params = new TreeMap<String, String>();
-        JSONObject response;
         try {
             params.put("canonical_verb", "GET");
-            params.put("canonical_uri", "/api/v2/members/me");
-
-            response = send_request(appAccount, params, TIME_OUT, true);
+            params.put("canonical_uri", "/api/v2/members/me.json");
+            JSONObject response = send_request(appAccount, params, TIME_OUT, true);
+            if (response == null) {
+                throw new AccountException("Can not get account information.");
+            }
+            return JSON.parseObject(response.toJSONString(), Account.class);
         } catch (Exception e) {
-            params.put("canonical_verb", "GET");
-            params.put("canonical_uri", "/api/v2/members/me");
-            response = send_request(appAccount, params, TIME_OUT, true);
+            throw new AccountException("Can not get account information.");
         }
-        if (response == null) {
-            throw new RuntimeException("Can't get_info");
-        }
-
-        Asset asset = new Asset();
-        asset.setAppAccountId(appAccount.getId());
-        asset.setMarket(getMarket());
-
-        JSONArray accounts = response.getJSONArray("accounts");
-        for (int i = 0; i < accounts.size(); i++) {
-            JSONObject balance = accounts.getJSONObject(i);
-            String currency1 = balance.getString("currency");
-            if (currency1.equals("btc")) {
-                asset.setAvailableBtc(balance.getDouble("balance"));
-                asset.setFrozenBtc(balance.getDouble("locked"));
-            }
-            if (currency1.equals("cny")) {
-                asset.setAvailableCny(balance.getDouble("balance"));
-                asset.setAvailableUsd(FiatConverter.toUsd(asset.getAvailableCny()));
-                asset.setFrozenCny(balance.getDouble("locked"));
-                asset.setFrozenUsd(FiatConverter.toUsd(asset.getFrozenCny()));
-            }
-        }
-        return asset;
-
     }
 
     @Override

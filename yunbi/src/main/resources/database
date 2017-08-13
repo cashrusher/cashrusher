@@ -9,7 +9,7 @@ CREATE TABLE account (
   email          VARCHAR(100)     NOT NULL,
   currency       VARCHAR(20)      NOT NULL,
   free_balance   DOUBLE PRECISION NOT NULL,
-  locked_balance DOUBLE PRECISION NOT NULL,
+  lockedBalance DOUBLE PRECISION NOT NULL,
   PRIMARY KEY (id)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
