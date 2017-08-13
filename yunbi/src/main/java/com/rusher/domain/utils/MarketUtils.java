@@ -1,6 +1,7 @@
 package com.rusher.domain.utils;
 
-import com.rusher.client.bitcoin.market.bean.Kline;
+
+import com.rusher.domain.protocol.Kline;
 
 /**
  * Created by classic1999 on 14-3-27.
