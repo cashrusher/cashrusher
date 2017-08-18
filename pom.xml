@@ -11,6 +11,7 @@
         <module>yunbi</module>
         <module>cashrusher-common</module>
         <module>kraken</module>
+        <module>okcoin</module>
     </modules>
     <packaging>pom</packaging>
     <name>cashrusher</name>
