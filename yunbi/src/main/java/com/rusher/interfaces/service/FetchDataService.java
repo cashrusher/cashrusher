@@ -1,6 +1,5 @@
 package com.rusher.interfaces.service;
 
-import com.rusher.domain.protocol.FetchDataResponse;
 import org.springframework.stereotype.Service;
 
 /**

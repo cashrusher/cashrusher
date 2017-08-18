@@ -11,7 +11,6 @@ public class MarketAsset {
     private Double availBalance = 0.0;
     private Double lockedBalance = 0.0;
 
-
     public Long getId() {
         return id;
     }
