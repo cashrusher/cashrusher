@@ -9,13 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>yunbi</artifactId>
-    <packaging>pom</packaging>
-    <name>yunbi</name>
+    <packaging>war</packaging>
+
     <dependencies>
         <dependency>
             <groupId>cashrusher</groupId>
-            <artifactId>cashrusher-common</artifactId>
-            <version>1.0</version>
+            <artifactId>commons</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rusher.domain.protocol.Amount;
 import com.rusher.domain.protocol.CoinType;
 import com.rusher.domain.protocol.SendParams;
+import org.junit.Test;
 
 /**
  * @author gengchj@foxmail.com
@@ -11,7 +12,8 @@ import com.rusher.domain.protocol.SendParams;
  */
 public class AppTest {
 
-	public static void main(String[] args) throws Exception {
+    @Test
+	public void TestApp() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		SendParams params = new SendParams();
 		params.setToEmail("gengchj@foxmail.com");
