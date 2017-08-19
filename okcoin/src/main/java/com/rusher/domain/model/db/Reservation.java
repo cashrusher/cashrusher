@@ -1,7 +1,7 @@
 package com.rusher.domain.model.db;
 
 
-import com.rusher.common.db.PersistenceSupport;
+import com.rusher.db.PersistenceSupport;
 
 import javax.persistence.*;
 

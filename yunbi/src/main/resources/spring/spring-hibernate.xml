@@ -48,7 +48,7 @@
         </property>
     </bean>
 
-    <bean id="commonRepository" class="com.rusher.common.repository.CommonRepository">
+    <bean id="commonRepository" class="com.rusher.repository.CommonRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

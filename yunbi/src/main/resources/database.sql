@@ -18,7 +18,6 @@ CREATE TABLE account (
   platform      VARCHAR(200)     NOT NULL comment 'The platform like Okcoin, yunbi, huobi etc',
   identity_num  VARCHAR(255)     NOT NULL,
   name          VARCHAR(100)     NOT NULL,
-  email         VARCHAR(100)     NOT NULL,
   currency      VARCHAR(20)      NOT NULL,
   free_balance  DOUBLE PRECISION NOT NULL,
   lockedBalance DOUBLE PRECISION NOT NULL,
