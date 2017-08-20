@@ -10,7 +10,7 @@ create TABLE api_auth(
 )ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 
-create TABLE assert (
+create TABLE asset (
   id                INT              NOT NULL AUTO_INCREMENT,
   user              VARCHAR (100) NOT NULL ,
   platform          VARCHAR (100) NOT NULL ,   # OKCOIN, YUNBI, BITTRADE, KRAKEN, HUOBI

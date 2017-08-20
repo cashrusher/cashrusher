@@ -14,11 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author zhupan
- * @version 1.0
- * @since 2009-3-19
- */
 @SuppressWarnings({"unchecked"})
 public class CommonRepository {
 

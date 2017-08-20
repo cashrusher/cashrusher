@@ -1,4 +1,4 @@
-package com.rusher.interfaces;
+package com.rusher.service;
 
 import org.apache.http.HttpException;
 

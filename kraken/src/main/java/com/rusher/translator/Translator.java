@@ -1,4 +1,4 @@
-package com.rusher.application.translator;
+package com.rusher.translator;
 
 public interface Translator<S, D> {
 

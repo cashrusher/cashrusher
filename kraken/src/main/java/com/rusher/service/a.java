@@ -1,4 +1,4 @@
-package com.rusher.domain.dto;
+package com.rusher.service;
 
 /**
  * Author: Liam

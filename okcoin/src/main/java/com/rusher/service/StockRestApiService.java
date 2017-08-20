@@ -1,9 +1,7 @@
-package com.rusher.interfaces.impl;
+package com.rusher.service;
 
-import com.rusher.interfaces.HttpUtilManager;
 import com.rusher.domain.utils.MD5Util;
 import com.rusher.domain.utils.StringUtil;
-import com.rusher.interfaces.IStockRestApi;
 import org.apache.http.HttpException;
 
 import java.io.IOException;
@@ -11,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class StockRestApi implements IStockRestApi{
+public class StockRestApiService implements IStockRestApi{
 
 	private String secret_key;
 	
@@ -19,13 +17,13 @@ public class StockRestApi implements IStockRestApi{
 	
 	private String url_prex;
 	
-	public StockRestApi(String url_prex,String api_key,String secret_key){
+	public StockRestApiService(String url_prex, String api_key, String secret_key){
 		this.api_key = api_key;
 		this.secret_key = secret_key;
 		this.url_prex = url_prex;
 	}
 	
-	public StockRestApi(String url_prex){
+	public StockRestApiService(String url_prex){
 		this.url_prex = url_prex;
 	}
 	

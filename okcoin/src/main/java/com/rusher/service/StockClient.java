@@ -1,7 +1,6 @@
-package com.rusher.interfaces;
+package com.rusher.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.rusher.interfaces.impl.StockRestApi;
 import org.apache.http.HttpException;
 
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class StockClient {
          * get请求无需发送身份认证,通常用于获取行情，市场深度等公共信息
          *
          */
-        IStockRestApi stockGet = new StockRestApi(url_prex);
+        IStockRestApi stockGet = new StockRestApiService(url_prex);
 
         /**
          * post请求需发送身份认证，获取用户个人相关信息时，需要指定api_key,与secret_key并与参数进行签名，
@@ -31,7 +30,7 @@ public class StockClient {
          * 发送post请求之前，程序会做自动加密，生成签名。
          *
          */
-        IStockRestApi stockPost = new StockRestApi(url_prex, api_key, secret_key);
+        IStockRestApi stockPost = new StockRestApiService(url_prex, api_key, secret_key);
 
         //现货行情
         stockGet.ticker("btc_usd");

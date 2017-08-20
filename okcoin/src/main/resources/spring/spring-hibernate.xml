@@ -28,9 +28,9 @@
         <property name="namingStrategy">
             <bean class="org.hibernate.cfg.ImprovedNamingStrategy"/>
         </property>
-        <!--<property name="entityInterceptor">-->
-            <!--<bean class="com.derbysoft.common.hibernate.PersistenceSupportHibernateInterceptor"/>-->
-        <!--</property>-->
+        <property name="entityInterceptor">
+            <bean class="com.rusher.db.PersistenceSupportHibernateInterceptor"/>
+        </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
@@ -43,7 +43,7 @@
         </property>
         <property name="packagesToScan">
             <list>
-                <value>com.rusher.domain.model.db</value>
+                <value>com.rusher.model</value>
             </list>
         </property>
     </bean>

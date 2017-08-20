@@ -1,4 +1,4 @@
-package com.rusher.application.service;
+package com.rusher.service;
 
 /**
  * Author: Liam
