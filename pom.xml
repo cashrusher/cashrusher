@@ -8,10 +8,8 @@
     <artifactId>cashrusher</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>yunbi</module>
         <module>commons</module>
-        <module>kraken</module>
-        <module>okcoin</module>
+        <module>rusher</module>
     </modules>
     <packaging>pom</packaging>
 
