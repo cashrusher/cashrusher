@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="assertProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
+        <constructor-arg index="0" ref="otaRequestMessageReader"/>
+        <constructor-arg index="1" ref="otaRequestReplyWriter"/>
+        <constructor-arg index="2" ref="otaRequestValidator"/>
+        <constructor-arg index="3" ref="otaReservationRequestMessageMarshaller"/>
+        <constructor-arg index="4" ref="assertProcessService"/>
+    </bean>
+
+    <!--<bean id="otaQueryRequestEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">-->
+    <!--<constructor-arg index="0" ref="otaRequestMessageReader"/>-->
+    <!--<constructor-arg index="1" ref="otaRequestReplyWriter"/>-->
+    <!--<constructor-arg index="2" ref="otaRequestValidator"/>-->
+    <!--<constructor-arg index="3" ref="otaQueryRequestMessageMarshaller"/>-->
+    <!--<constructor-arg index="4" ref="jsonQueryProcessService"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="otaCancelRequestEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">-->
+    <!--<constructor-arg index="0" ref="otaRequestMessageReader"/>-->
+    <!--<constructor-arg index="1" ref="otaRequestReplyWriter"/>-->
+    <!--<constructor-arg index="2" ref="otaRequestValidator"/>-->
+    <!--<constructor-arg index="3" ref="otaCancelRequestMessageMarshaller"/>-->
+    <!--<constructor-arg index="4" ref="jsonCancelProcessService"/>-->
+    <!--</bean>-->
+
+    <bean id="otaRequestMessageReader" class="com.rusher.ws.WebServiceRequestMessageReader">
+        <constructor-arg value="UTF-8"/>
+    </bean>
+
+    <bean id="otaRequestReplyWriter" class="com.rusher.ws.WebServiceRequestReplyWriter"/>
+
+    <bean id="otaRequestValidator" class="com.rusher.ws.WebServiceRequestValidator">
+        <!---->
+        <property name="gzipRequired" value="false"/>
+
+        <!---->
+        <property name="requestLarge" value="0"/>
+
+    </bean>
+
+    <!--JSON-->
+    <bean id="otaReservationRequestMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">
+        <constructor-arg value="com.rusher.interfaces.dto.AssertRequest"/>
+    </bean>
+
+    <!--<bean id="otaQueryRequestMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">-->
+    <!--<constructor-arg value="com.derbysoft.doorway.json.protocol.QueryReservationRequest"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="otaCancelRequestMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">-->
+    <!--<constructor-arg value="com.derbysoft.doorway.json.protocol.CancelRequest"/>-->
+    <!--</bean>-->
+</beans>

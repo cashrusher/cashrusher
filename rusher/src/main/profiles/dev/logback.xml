@@ -1,0 +1,25 @@
+<configuration debug="false" scan="true">
+    <property resource="logback-kafka.properties"/>
+    <appender name="NO_LOG" class="ch.qos.logback.core.helpers.NOPAppender">
+    </appender>
+    <appender name="APP_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/usr/local/logs/cashrusher.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/usr/local/logs/cashrusher.log.%d{yyyy-MM-dd,GMT}.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>512000KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %5p %c{1}:%L-%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="APP_LOG"/>
+    </root>
+
+    <logger name="com.cashrusher" level="INFO" additivity="false">
+        <appender-ref ref="APP_LOG"/>
+    </logger>
+</configuration>
