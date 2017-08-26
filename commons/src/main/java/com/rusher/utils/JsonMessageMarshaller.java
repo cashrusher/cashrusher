@@ -1,6 +1,6 @@
 package com.rusher.utils;
 
-import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rusher.ws.WebServiceMessageMarshaller;
 
 /**
@@ -9,21 +9,23 @@ import com.rusher.ws.WebServiceMessageMarshaller;
  */
 public class JsonMessageMarshaller extends WebServiceMessageMarshaller {
     private Class clazz;
+    private ObjectMapper mapper;
 
     public JsonMessageMarshaller() {
     }
 
-    public JsonMessageMarshaller(Class clazz) {
+    public JsonMessageMarshaller(Class clazz, ObjectMapper objectMapper) {
         this.clazz = clazz;
+        this.mapper = objectMapper;
     }
 
     @Override
-    public String marshal(Object object) {
-        return JSON.toJSONString(object);
+    public String marshal(Object object) throws Exception {
+        return mapper.writeValueAsString(object);
     }
 
     @Override
     public Object doUnmarshal(String value) throws Exception {
-        return JSON.parseObject(value, clazz);
+        return mapper.readValue(value, clazz);
     }
 }

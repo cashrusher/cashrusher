@@ -5,4 +5,5 @@ package com.rusher.interfaces.dto;
  * Date: 2017/8/23
  */
 public class AssertRequest {
+
 }

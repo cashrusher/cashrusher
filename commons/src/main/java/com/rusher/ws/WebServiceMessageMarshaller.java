@@ -2,7 +2,7 @@ package com.rusher.ws;
 
 
 public abstract class WebServiceMessageMarshaller {
-    public abstract String marshal(Object object);
+    public abstract String marshal(Object object) throws Exception;
 
     public Object unmarshal(String value) {
         if (value == null) {
