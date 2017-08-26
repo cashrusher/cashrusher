@@ -17,8 +17,9 @@ public class OKCoinService {
         IStockRestApi stockPost = new StockRestApiService(OKCOIN_URL, auth.getApiKey(), auth.getSecretKey());
         try {
             String user = stockPost.userinfo();
+            System.out.println(user);
             OKCoinAssert anAssert = mapper.readValue(user, OKCoinAssert.class);
-            System.out.println(anAssert);
+            return anAssert;
         } catch (Exception e) {
             e.printStackTrace();
         }

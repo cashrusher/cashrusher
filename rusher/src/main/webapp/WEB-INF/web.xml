@@ -27,11 +27,11 @@
     </filter-mapping>
 
     <servlet>
-        <servlet-name>assertProcessEndpoint</servlet-name>
+        <servlet-name>assetProcessEndpoint</servlet-name>
         <servlet-class>com.rusher.servlet.DelegatingServletProxy</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>assertProcessEndpoint</servlet-name>
+        <servlet-name>assetProcessEndpoint</servlet-name>
         <url-pattern>/json/assert</url-pattern>
     </servlet-mapping>
 

@@ -32,20 +32,20 @@ public class WebServiceRequestValidator {
             throw new HttpErrorException(HttpStatusCodes.BAD_REQUEST, "GZip is required");
         }
 
-        if (!HttpHeaderHelper.hasContentLength(httpServletRequest)) {
-            throw new HttpErrorException(HttpStatusCodes.CONTENT_LENGTH_REQUIRED, "Content-Length is required");
-        }
+//        if (!HttpHeaderHelper.hasContentLength(httpServletRequest)) {
+//            throw new HttpErrorException(HttpStatusCodes.CONTENT_LENGTH_REQUIRED, "Content-Length is required");
+//        }
 
-        try {
-            final int contentLength = HttpHeaderHelper.getContentLength(httpServletRequest);
-            if (contentLength < 1) {
-                throw new HttpErrorException(HttpStatusCodes.CONTENT_LENGTH_REQUIRED, "Illegal Content-Length:" + contentLength);
-            }
-            if (requestLarge > 0 && contentLength > requestLarge) {
-                throw new HttpErrorException(HttpStatusCodes.REQUEST_TOO_LARGE, "request large:" + contentLength + ", max support:" + requestLarge);
-            }
-        } catch (Exception e) {
-            throw new HttpErrorException(HttpStatusCodes.BAD_REQUEST, e.getMessage());
-        }
+//        try {
+//            final int contentLength = HttpHeaderHelper.getContentLength(httpServletRequest);
+//            if (contentLength < 1) {
+//                throw new HttpErrorException(HttpStatusCodes.CONTENT_LENGTH_REQUIRED, "Illegal Content-Length:" + contentLength);
+//            }
+//            if (requestLarge > 0 && contentLength > requestLarge) {
+//                throw new HttpErrorException(HttpStatusCodes.REQUEST_TOO_LARGE, "request large:" + contentLength + ", max support:" + requestLarge);
+//            }
+//        } catch (Exception e) {
+//            throw new HttpErrorException(HttpStatusCodes.BAD_REQUEST, e.getMessage());
+//        }
     }
 }

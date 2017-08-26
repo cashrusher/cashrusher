@@ -40,6 +40,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Funds {
     @JsonProperty("borrow")
     private Currencies borrow;
+    //The currency is CNY
     @JsonProperty("asset")
     private Asset asset;
     @JsonProperty("free")

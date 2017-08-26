@@ -3,6 +3,7 @@ package com.rusher.interfaces.ws.endpoint;
 import com.rusher.ws.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.ws.transport.TransportConstants;
 
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,11 @@ public class WebServiceRequestEndPoint extends HttpServlet {
     protected void service(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         try {
             validateWebParam(httpServletRequest);
+            if (httpServletRequest.getMethod() == HttpMethod.GET.name()) {
+                final Object response = processService.process();
+                write(httpServletRequest, httpServletResponse, Charset.forName("UTF-8"), marshaller.marshal(response));
+                return;
+            }
             final WebServiceRequestMessage message = reader.read(httpServletRequest);
             final Object request = marshaller.unmarshal(WebServiceRequestMessageHelper.toString(message));
             final Object response = processService.process(request, message);

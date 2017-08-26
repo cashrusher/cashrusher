@@ -3,12 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="assertProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
+    <bean id="assetProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
         <constructor-arg index="0" ref="otaRequestMessageReader"/>
         <constructor-arg index="1" ref="otaRequestReplyWriter"/>
         <constructor-arg index="2" ref="otaRequestValidator"/>
-        <constructor-arg index="3" ref="otaReservationRequestMessageMarshaller"/>
-        <constructor-arg index="4" ref="assertProcessService"/>
+        <constructor-arg index="3" ref="assetRequestMessageMarshaller"/>
+        <constructor-arg index="4" ref="assetProcessService"/>
     </bean>
 
     <!--<bean id="otaQueryRequestEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">-->
@@ -43,10 +43,12 @@
     </bean>
 
     <!--JSON-->
-    <bean id="otaReservationRequestMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">
+    <bean id="assetRequestMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">
         <constructor-arg value="com.rusher.interfaces.dto.AssertRequest"/>
-        <constructor-arg value="com.fasterxml.jackson.databind.ObjectMapper"/>
+        <constructor-arg ref="objectMapper"/>
     </bean>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
     <!--<bean id="otaQueryRequestMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">-->
     <!--<constructor-arg value="com.derbysoft.doorway.json.protocol.QueryReservationRequest"/>-->
