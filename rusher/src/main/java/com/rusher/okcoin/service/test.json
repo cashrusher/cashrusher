@@ -33,3 +33,183 @@
     }
   }
 }
+
+{
+  "uniqueID": "PEANMVNSFJPTIO",
+  "name": "ä»˜ä¸‡è¿›",
+  "email": "woshifuwanjin@126.com",
+  "registID": "313590816",
+  "accountAssets": [
+    {
+      "currency": "cny",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "btc",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "ltc",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "doge",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "bts",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "bitcny",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "bitusd",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "bitbtc",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "note",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "pls",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "nxt",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "eth",
+      "availBalance": 2.91,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "sc",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "dgd",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "dcs",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "dao",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "etc",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "amp",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "1st",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "rep",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "ans",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "zec",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "zmc",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "gnt",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "gxs",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "qtum",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "eos",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "snt",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "bcc",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "omg",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "lun",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "pay",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "ven",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    },
+    {
+      "currency": "yun",
+      "availBalance": 0.0,
+      "lockedBalance": 0.0
+    }
+  ],
+  "activated": true
+}

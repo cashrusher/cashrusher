@@ -1,5 +1,6 @@
 package com.rusher.yunbi.service;
 
+import com.rusher.Authorization;
 import com.rusher.yunbi.dto.Account;
 import com.rusher.yunbi.dto.AuthorizationKey;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,13 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class AccountService {
+public class YunBiService {
 
     @Autowired
-    private YunBiAPIService yunbiAPI;
+    private YunBiAPI yunbiAPI;
 
-    private final String accessKey = "WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt";
-    private final String secretKey = "v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt";
 
-    private AuthorizationKey getAuthorizationKey() {
+    private AuthorizationKey getAuthorizationKey(String accessKey, String secretKey) {
         AuthorizationKey authorizationKey = new AuthorizationKey();
         authorizationKey.setId(1L);
         authorizationKey.setAccessKey(accessKey); //
@@ -26,16 +25,15 @@ public class AccountService {
         return authorizationKey;
     }
 
-    public Account getAccount() {
-        Account account = yunbiAPI.getAccount(getAuthorizationKey());
-        return account;
+    public Account getAccount(Authorization authorization) {
+        return yunbiAPI.getAccount(getAuthorizationKey(authorization.getApiKey(), authorization.getSecretKey()));
     }
 
-    public YunBiAPIService getYunbiAPI() {
+    public YunBiAPI getYunbiAPI() {
         return yunbiAPI;
     }
 
-    public void setYunbiAPI(YunBiAPIService yunbiAPI) {
+    public void setYunbiAPI(YunBiAPI yunbiAPI) {
         this.yunbiAPI = yunbiAPI;
     }
 }

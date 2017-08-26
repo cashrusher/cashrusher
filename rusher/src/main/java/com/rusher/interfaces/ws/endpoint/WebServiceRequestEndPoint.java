@@ -41,13 +41,13 @@ public class WebServiceRequestEndPoint extends HttpServlet {
         try {
             validateWebParam(httpServletRequest);
             if (httpServletRequest.getMethod() == HttpMethod.GET.name()) {
-                final Object response = processService.process();
+                final Object response = processService.processGet();
                 write(httpServletRequest, httpServletResponse, Charset.forName("UTF-8"), marshaller.marshal(response));
                 return;
             }
             final WebServiceRequestMessage message = reader.read(httpServletRequest);
             final Object request = marshaller.unmarshal(WebServiceRequestMessageHelper.toString(message));
-            final Object response = processService.process(request, message);
+            final Object response = processService.processPost(request, message);
             write(httpServletRequest, httpServletResponse, message.getCharset(), marshaller.marshal(response));
         } catch (Throwable e) {
             writeException(httpServletRequest, httpServletResponse, reader.getRequestCharset(httpServletRequest), e);

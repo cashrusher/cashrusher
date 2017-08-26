@@ -1,23 +1,33 @@
 package com.rusher.interfaces.ws.service;
 
-import com.rusher.interfaces.dto.AssertRequest;
+import com.google.common.collect.Lists;
+import com.rusher.Authorization;
+import com.rusher.interfaces.dto.AssertResponse;
+import com.rusher.interfaces.dto.Detail;
+import com.rusher.interfaces.dto.PlatformAsset;
+import com.rusher.interfaces.dto.Total;
 import com.rusher.kraken.service.KrakenService;
-import com.rusher.okcoin.Authorization;
+import com.rusher.okcoin.dto.Funds;
 import com.rusher.okcoin.dto.OKCoinAssert;
 import com.rusher.okcoin.service.OKCoinService;
 import com.rusher.ws.WebServiceRequestMessage;
 import com.rusher.ws.WebServiceRequestProcessService;
+import com.rusher.yunbi.dto.Account;
+import com.rusher.yunbi.dto.AccountAsset;
+import com.rusher.yunbi.service.YunBiService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Author: Liam
  * Date: 2017/8/23
  */
 @Service("assetProcessService")
-public class AssetProcessService implements WebServiceRequestProcessService<AssertRequest, Object> {
+public class AssetProcessService implements WebServiceRequestProcessService<AssertResponse, Object> {
     private final Log logger = LogFactory.getLog("ERR_LOG");
     @Autowired
     private KrakenService krakenService;
@@ -25,16 +35,82 @@ public class AssetProcessService implements WebServiceRequestProcessService<Asse
     @Autowired
     private OKCoinService okCoinService;
 
+    @Autowired
+    private YunBiService yunBiService;
+
     @Override
-    public Object process(AssertRequest request, WebServiceRequestMessage message) {
+    public Object processPost(AssertResponse request, WebServiceRequestMessage message) {
         OKCoinAssert okCoinAssert = okCoinService.getAssert(new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
 
         return null;
     }
 
     @Override
-    public Object process() {
-        OKCoinAssert okCoinAssert = okCoinService.getAssert(new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
-        return okCoinAssert;
+    public Object processGet() {
+        OKCoinAssert okCoinAssert = okCoinService.getAssert(
+                new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
+
+        Account yunbiAccount = yunBiService.getAccount(
+                new Authorization("WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt", "v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt"));
+        return createAssertResponse(okCoinAssert, yunbiAccount);
+    }
+
+    private AssertResponse createAssertResponse(OKCoinAssert okCoinAssert, Account yunbiAccount) {
+        AssertResponse response = new AssertResponse();
+        response.setTotal(createTotal(okCoinAssert.getInfo().getFunds().getAsset().getTotal()));
+        response.setDetail(createDetail(okCoinAssert.getInfo().getFunds(), yunbiAccount.getAccountAssets()));
+        return response;
+    }
+
+    private Detail createDetail(Funds funds, List<AccountAsset> accountAssets) {
+        Detail detail = new Detail();
+        detail.setOkcoin(deleteZeroAsset(createOKCoin(funds)));
+        detail.setYunbi(deleteZeroAsset(createYunBi(accountAssets)));
+        return detail;
+    }
+
+    private List<PlatformAsset> createYunBi(List<AccountAsset> accountAssets) {
+        List<PlatformAsset> platformAssets = Lists.newArrayList();
+        for (AccountAsset accountAsset : accountAssets) {
+            platformAssets.add(createAsset(accountAsset.getCurrency(), accountAsset.getAvailBalance(), accountAsset.getAvailBalance(), accountAsset.getLockedBalance()));
+        }
+        return platformAssets;
+    }
+
+    private List<PlatformAsset> deleteZeroAsset(List<PlatformAsset> platformAssets) {
+        List<PlatformAsset> cleanPlatformAsset = Lists.newArrayList();
+        for (PlatformAsset platformAsset : platformAssets) {
+            if (platformAsset.getAvailable() > 0d || platformAsset.getLocked() > 0d) {
+                cleanPlatformAsset.add(platformAsset);
+            }
+        }
+        return cleanPlatformAsset;
+    }
+
+    private List<PlatformAsset> createOKCoin(Funds funds) {
+        List<PlatformAsset> platformAssets = Lists.newArrayList();
+        platformAssets.add(createAsset("cny", funds.getFree().getCNY(), funds.getFree().getCNY(), funds.getFreezed().getCNY()));
+        platformAssets.add(createAsset("eth", funds.getFree().getETH(), funds.getFree().getETH(), funds.getFreezed().getETH()));
+        platformAssets.add(createAsset("bcc", funds.getFree().getBCC(), funds.getFree().getBCC(), funds.getFreezed().getBCC()));
+        platformAssets.add(createAsset("btc", funds.getFree().getBTC(), funds.getFree().getBTC(), funds.getFreezed().getBTC()));
+        platformAssets.add(createAsset("etc", funds.getFree().getETC(), funds.getFree().getETC(), funds.getFreezed().getETC()));
+        platformAssets.add(createAsset("ltc", funds.getFree().getLTC(), funds.getFree().getLTC(), funds.getFreezed().getLTC()));
+        return platformAssets;
+    }
+
+    private PlatformAsset createAsset(String currency, double cny, double avail, double locked) {
+        PlatformAsset asset = new PlatformAsset();
+        asset.setCurrency(currency);
+        asset.setCny(cny);
+        asset.setAvailable(avail);
+        asset.setLocked(locked);
+        return asset;
+    }
+
+
+    private Total createTotal(double total) {
+        Total total1 = new Total();
+        total1.setCny(total);
+        return total1;
     }
 }

@@ -11,6 +11,7 @@ import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Mac;
@@ -22,14 +23,14 @@ import java.util.*;
 
 import static com.rusher.yunbi.dto.Currency.CNY;
 
-@Service
-public class YunBiAPIService extends AbstractMarketApi {
-    private static final Logger LOG = LoggerFactory.getLogger(YunBiAPIService.class);
+@Component("yunBiAPI")
+public class YunBiAPI extends AbstractMarketApi {
+    private static final Logger LOG = LoggerFactory.getLogger(YunBiAPI.class);
     private static final String PEATIO_URL = "https://yunbi.com";
     private static final long DURATION = 1000;
     private static final int TIME_OUT = 15000;
 
-    public YunBiAPIService() {
+    public YunBiAPI() {
         super(CNY, Market.PeatioCNY);
     }
 

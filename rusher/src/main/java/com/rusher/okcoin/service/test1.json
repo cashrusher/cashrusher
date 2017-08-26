@@ -1,0 +1,255 @@
+{
+  "total": {
+    "ratio": null,
+    "cny": 883.16,
+    "usd": 0.0
+  },
+  "detail": {
+    "okcoin": [
+      {
+        "currency": "cny",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "eth",
+        "available": 0.4,
+        "locked": 0.0,
+        "cny": 0.4
+      },
+      {
+        "currency": "bcc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "btc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "etc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "ltc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      }
+    ],
+    "yunbi": [
+      {
+        "currency": "cny",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "btc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "ltc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "doge",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "bts",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "bitcny",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "bitusd",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "bitbtc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "note",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "pls",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "nxt",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "eth",
+        "available": 2.91,
+        "locked": 0.0,
+        "cny": 2.91
+      },
+      {
+        "currency": "sc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "dgd",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "dcs",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "dao",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "etc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "amp",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "1st",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "rep",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "ans",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "zec",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "zmc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "gnt",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "gxs",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "qtum",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "eos",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "snt",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "bcc",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "omg",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "lun",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "pay",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "ven",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      },
+      {
+        "currency": "yun",
+        "available": 0.0,
+        "locked": 0.0,
+        "cny": 0.0
+      }
+    ],
+    "huobi": null,
+    "craken": null
+  }
+}

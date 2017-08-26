@@ -1,7 +1,7 @@
 package com.rusher.okcoin.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rusher.okcoin.Authorization;
+import com.rusher.Authorization;
 import com.rusher.okcoin.dto.OKCoinAssert;
 import org.springframework.stereotype.Service;
 
