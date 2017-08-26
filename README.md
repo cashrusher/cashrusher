@@ -1,6 +1,7 @@
 # cashrusher
 
-1. Maven的setting.xml文件的配置：
+# 系统配置
+## Maven的setting.xml文件的配置：
 
 ```xml
 	<mirrors>
@@ -14,11 +15,11 @@
 
 ```
 
-2. Client for YunBi
+## Client for YunBi
 
 https://github.com/peatio/peatio-client-java.git
 
-3. About the database
+## About the database
 
 We use mariaDB(same as MySQL).
  1. MariaDB for Mac installation: https://mariadb.com/kb/en/the-mariadb-library/installing-mariadb-on-macos-using-homebrew/
@@ -28,7 +29,10 @@ We use mariaDB(same as MySQL).
 
 ## 获取个人资产
 
-  URL:  http://localhost:8088/rusher/json/assert
+    URL:  http://35.164.34.250/rusher/json/assert
+    HTTP GET
+  
+  Response:
   
   ```json
   {
@@ -71,5 +75,17 @@ We use mariaDB(same as MySQL).
           }
         ]
       }
+  }
+  ```
+  
+## 设置页面
+
+    URL:  http://35.164.34.250/rusher/
+    HTTP POST
+  
+  Response
+  ```json
+  {
+      
   }
   ```
