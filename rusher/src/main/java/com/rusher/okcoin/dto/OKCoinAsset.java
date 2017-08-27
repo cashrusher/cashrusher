@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * "cny": "0"
  * }}}}
  */
-public class OKCoinAssert {
+public class OKCoinAsset {
     @JsonProperty("result")
     private boolean result;
 

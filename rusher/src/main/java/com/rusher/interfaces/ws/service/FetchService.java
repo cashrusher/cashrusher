@@ -5,7 +5,7 @@ package com.rusher.interfaces.ws.service;
  * To Fetch data
  */
 public class FetchService {
-    public void FetchUserAssert(){
+    public void FetchUserAsset(){
 
     }
 }

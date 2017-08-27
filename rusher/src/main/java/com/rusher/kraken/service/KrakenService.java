@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KrakenService {
 
-    public KrakenAssert getAssert() {
+    public KrakenAsset getAsset() {
         return null;
     }
 }

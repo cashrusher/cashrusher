@@ -44,7 +44,7 @@
 
     <!--JSON-->
     <bean id="assetRequestMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">
-        <constructor-arg value="com.rusher.interfaces.dto.AssertResponse"/>
+        <constructor-arg value="com.rusher.interfaces.dto.AssetResponse"/>
         <constructor-arg ref="objectMapper"/>
     </bean>
 

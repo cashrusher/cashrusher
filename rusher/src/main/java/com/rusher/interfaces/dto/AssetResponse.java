@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Author: Liam
  * Date: 2017/8/23
  */
-public class AssertResponse {
+public class AssetResponse {
     @JsonProperty("total")
     private Total total;
     @JsonProperty("detail")

@@ -2,7 +2,7 @@ package com.rusher.okcoin.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rusher.Authorization;
-import com.rusher.okcoin.dto.OKCoinAssert;
+import com.rusher.okcoin.dto.OKCoinAsset;
 import org.springframework.stereotype.Service;
 
 import static com.rusher.okcoin.constant.OKCOIN_URL;
@@ -13,13 +13,13 @@ import static com.rusher.okcoin.constant.OKCOIN_URL;
 @Service
 public class OKCoinService {
     private ObjectMapper mapper = new ObjectMapper();
-    public OKCoinAssert getAssert(Authorization auth) {
+    public OKCoinAsset getAsset(Authorization auth) {
         IStockRestApi stockPost = new StockRestApiService(OKCOIN_URL, auth.getApiKey(), auth.getSecretKey());
         try {
             String user = stockPost.userinfo();
             System.out.println(user);
-            OKCoinAssert anAssert = mapper.readValue(user, OKCoinAssert.class);
-            return anAssert;
+            OKCoinAsset anAsset = mapper.readValue(user, OKCoinAsset.class);
+            return anAsset;
         } catch (Exception e) {
             e.printStackTrace();
         }

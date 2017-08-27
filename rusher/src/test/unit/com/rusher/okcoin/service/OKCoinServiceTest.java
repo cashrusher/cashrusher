@@ -17,9 +17,9 @@ public class OKCoinServiceTest {
     }
 
     @Test
-    public void getAssert() throws Exception {
+    public void getAsset() throws Exception {
         OKCoinService okCoinService=new OKCoinService();
-//        okCoinService.getAssert(authorization);
+//        okCoinService.getAsset(authorization);
     }
 
 }

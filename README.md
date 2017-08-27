@@ -29,7 +29,7 @@ We use mariaDB(same as MySQL).
 
 ## 获取个人资产
 
-    URL:  http://35.164.34.250/rusher/json/assert
+    URL:  http://35.164.34.250/rusher/json/asset
     HTTP GET
   
   Response:

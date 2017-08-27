@@ -7,7 +7,7 @@ import javax.persistence.*;
 /**
  * Created by liam on 19/08/2017.
  * <p>
- * create TABLE assert (
+ * create TABLE asset (
  * id                INT              NOT NULL AUTO_INCREMENT,
  * user              VARCHAR (100) NOT NULL ,
  * platform          VARCHAR (100) NOT NULL ,   # OKCOIN, YUNBI, BITTRADE, KRAKEN, HUOBI
@@ -23,9 +23,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(
-        name = "assert"
+        name = "asset"
 )
-public class Assert extends PersistenceSupport {
+public class Asset extends PersistenceSupport {
     @Column(nullable = false)
     private String user;
 

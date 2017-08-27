@@ -2,13 +2,13 @@ package com.rusher.interfaces.ws.service;
 
 import com.google.common.collect.Lists;
 import com.rusher.Authorization;
-import com.rusher.interfaces.dto.AssertResponse;
+import com.rusher.interfaces.dto.AssetResponse;
 import com.rusher.interfaces.dto.Detail;
 import com.rusher.interfaces.dto.PlatformAsset;
 import com.rusher.interfaces.dto.Total;
 import com.rusher.kraken.service.KrakenService;
 import com.rusher.okcoin.dto.Funds;
-import com.rusher.okcoin.dto.OKCoinAssert;
+import com.rusher.okcoin.dto.OKCoinAsset;
 import com.rusher.okcoin.service.OKCoinService;
 import com.rusher.ws.WebServiceRequestMessage;
 import com.rusher.ws.WebServiceRequestProcessService;
@@ -27,7 +27,7 @@ import java.util.List;
  * Date: 2017/8/23
  */
 @Service("assetProcessService")
-public class AssetProcessService implements WebServiceRequestProcessService<AssertResponse, Object> {
+public class AssetProcessService implements WebServiceRequestProcessService<AssetResponse, Object> {
     private final Log logger = LogFactory.getLog("ERR_LOG");
     @Autowired
     private KrakenService krakenService;
@@ -39,26 +39,26 @@ public class AssetProcessService implements WebServiceRequestProcessService<Asse
     private YunBiService yunBiService;
 
     @Override
-    public Object processPost(AssertResponse request, WebServiceRequestMessage message) {
-        OKCoinAssert okCoinAssert = okCoinService.getAssert(new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
+    public Object processPost(AssetResponse request, WebServiceRequestMessage message) {
+        OKCoinAsset okCoinAsset = okCoinService.getAsset(new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
 
         return null;
     }
 
     @Override
     public Object processGet() {
-        OKCoinAssert okCoinAssert = okCoinService.getAssert(
+        OKCoinAsset okCoinAsset = okCoinService.getAsset(
                 new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
 
         Account yunbiAccount = yunBiService.getAccount(
                 new Authorization("WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt", "v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt"));
-        return createAssertResponse(okCoinAssert, yunbiAccount);
+        return createAssetResponse(okCoinAsset, yunbiAccount);
     }
 
-    private AssertResponse createAssertResponse(OKCoinAssert okCoinAssert, Account yunbiAccount) {
-        AssertResponse response = new AssertResponse();
-        response.setTotal(createTotal(okCoinAssert.getInfo().getFunds().getAsset().getTotal()));
-        response.setDetail(createDetail(okCoinAssert.getInfo().getFunds(), yunbiAccount.getAccountAssets()));
+    private AssetResponse createAssetResponse(OKCoinAsset okCoinAsset, Account yunbiAccount) {
+        AssetResponse response = new AssetResponse();
+        response.setTotal(createTotal(okCoinAsset.getInfo().getFunds().getAsset().getTotal()));
+        response.setDetail(createDetail(okCoinAsset.getInfo().getFunds(), yunbiAccount.getAccountAssets()));
         return response;
     }
 
