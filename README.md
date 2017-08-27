@@ -31,6 +31,9 @@ We use mariaDB(same as MySQL).
 
     URL:  http://35.164.34.250/rusher/json/asset
     HTTP GET
+    
+  每个平台的小记功能由前端算出，人民币和美元保留2位小数，其他的虚拟货币保留6位
+  需要注意的是，由于虚拟货币对应现实货币的价格浮动比较频繁，所以在这里展示的美元和人民币的价值是页面刷新的那一刻的值。
   
   Response:
   
@@ -139,8 +142,8 @@ We use mariaDB(same as MySQL).
     ],
     "calculate": {
       "kraken": {
-        "sellratio": 0.21,
-        "buyratio": 0.12
+        "sellratio": 0.021,
+        "buyratio": 0.012
       },
       "bitfinex": {
         "sellratio": 0.13,
@@ -149,6 +152,5 @@ We use mariaDB(same as MySQL).
     }
   },
   "cnyusdratio":6.45
-  
-  ```
 }
+  ```
