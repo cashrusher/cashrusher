@@ -1,5 +1,7 @@
 package com.rusher.yunbi.dto;
 
+import com.rusher.Currency;
+
 /**
  * Created by liam on 13/08/2017.
  */

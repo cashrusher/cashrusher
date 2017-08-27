@@ -28,4 +28,8 @@ public class JsonMessageMarshaller extends WebServiceMessageMarshaller {
     public Object doUnmarshal(String value) throws Exception {
         return mapper.readValue(value, clazz);
     }
+
+    public Object doUnmarshal(String value, Class clazz) throws Exception {
+        return mapper.readValue(value, clazz);
+    }
 }

@@ -22,6 +22,11 @@ public enum Symbol {
         }
 
         @Override
+        public boolean isEth() {
+            return false;
+        }
+
+        @Override
         public boolean isCny() {
             return false;
         }
@@ -45,6 +50,11 @@ public enum Symbol {
         public boolean isCny() {
             return false;
         }
+
+        @Override
+        public boolean isEth() {
+            return false;
+        }
     }, usd {
         @Override
         public boolean isBtc() {
@@ -63,6 +73,11 @@ public enum Symbol {
 
         @Override
         public boolean isCny() {
+            return false;
+        }
+
+        @Override
+        public boolean isEth() {
             return false;
         }
     }, cny {
@@ -85,6 +100,36 @@ public enum Symbol {
         public boolean isCny() {
             return true;
         }
+
+        @Override
+        public boolean isEth() {
+            return false;
+        }
+    }, eth {
+        @Override
+        public boolean isBtc() {
+            return false;
+        }
+
+        @Override
+        public boolean isLtc() {
+            return false;
+        }
+
+        @Override
+        public boolean isUsd() {
+            return false;
+        }
+
+        @Override
+        public boolean isCny() {
+            return false;
+        }
+
+        @Override
+        public boolean isEth() {
+            return true;
+        }
     };
 
     public abstract boolean isBtc();
@@ -94,5 +139,8 @@ public enum Symbol {
     public abstract boolean isUsd();
 
     public abstract boolean isCny();
+
+    public abstract boolean isEth();
+
 }
 

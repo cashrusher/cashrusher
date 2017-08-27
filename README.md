@@ -89,3 +89,66 @@ We use mariaDB(same as MySQL).
       
   }
   ```
+  
+  
+## 价差套利数据展示接口
+
+前端页面每隔30s调用一次，通过此接口来获取最新数据并刷新页面展示。
+
+    URL:  http://35.164.34.250/rusher/json/jiachadata
+    HTTP POST
+  
+  Response
+  ```json
+{
+  "mainland": {
+    "tickers": [
+      {
+        "platform": "okcoin",
+        "currency": "cny",
+        "buy": 22504.23,
+        "sell": 22521.22
+      },
+      {
+        "platform": "yunbi",
+        "currency": "cny",
+        "buy": 22201.32,
+        "sell": 22543.22
+      }
+    ],
+    "calculate": {
+      "maxsell": 22543.22,
+      "minbuy": 22201.32,
+      "maxsellminbuyratio":1.023
+    }
+  },
+  "abroad": {
+    "tickers": [
+      {
+        "platform": "kraken",
+        "currency": "usd",
+        "buy": 156.20,
+        "sell": 169.44
+      },
+      {
+        "platform": "kraken",
+        "currency": "cny",
+        "buy": 22201.32,
+        "sell": 22543.22
+      }
+    ],
+    "calculate": {
+      "kraken": {
+        "sellratio": 0.21,
+        "buyratio": 0.12
+      },
+      "bitfinex": {
+        "sellratio": 0.13,
+        "buyratio": 0.24
+      }
+    }
+  },
+  "cnyusdratio":6.45
+  
+  ```
+}

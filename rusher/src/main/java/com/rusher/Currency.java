@@ -1,10 +1,10 @@
-package com.rusher.yunbi.dto;
+package com.rusher;
 
 /**
  * Created by liam on  2017-08-13
  */
 public enum Currency {
-    CNY("cny"), USD("usd");
+    CNY("cny"), USD("usd"), ETH("eth"), BTC("btc");
 
     private String currency;
 
@@ -24,4 +24,4 @@ public enum Currency {
         }
         throw new IllegalArgumentException(currency + " is not a valid Currency");
     }
-}
+    }

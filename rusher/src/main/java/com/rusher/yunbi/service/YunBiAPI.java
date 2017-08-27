@@ -12,7 +12,6 @@ import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -21,7 +20,7 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.*;
 
-import static com.rusher.yunbi.dto.Currency.CNY;
+import static com.rusher.Currency.CNY;
 
 @Component("yunBiAPI")
 public class YunBiAPI extends AbstractMarketApi {
@@ -306,6 +305,11 @@ public class YunBiAPI extends AbstractMarketApi {
         JSONObject jsonObject = JSONArray.parseObject(text);
         JSONObject ticker = jsonObject.getJSONObject("ticker");
         return FiatConverter.toUsd(ticker.getDouble("last"));
+    }
+
+    public String tickerStr(SymbolPair symbol) throws IOException {
+        String ticker_url = PEATIO_URL + "/api/v2/tickers/" + getSymbolPairDescFromUsd2Cny(symbol);
+        return HttpUtils.getContentForGet(ticker_url, 5000);
     }
 
     @Override

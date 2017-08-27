@@ -1,32 +1,50 @@
 {
-  "okcoin":{
-    "cny":{
-      "latest":22505.43,
-      "buy":22504.23,
-      "sell":22521.22,
-      "high":22750,
-      "low":21691,
-      "vol":12244.09
+  "mainland": {
+    "tickers": [
+      {
+        "platform": "okcoin",
+        "currency": "cny",
+        "buy": 22504.23,
+        "sell": 22521.22
+      },
+      {
+        "platform": "yunbi",
+        "currency": "cny",
+        "buy": 22201.32,
+        "sell": 22543.22
+      }
+    ],
+    "calculate": {
+      "maxsell": 22543.22,
+      "minbuy": 22201.32,
+      "maxsellminbuyratio":1.023
     }
   },
-  "yunbi":{
-    "cny":{
-      "latest":22505.43,
-      "buy":22504.23,
-      "sell":22521.22,
-      "high":22750,
-      "low":21691,
-      "vol":12244.09
+  "abroad": {
+    "tickers": [
+      {
+        "platform": "kraken",
+        "currency": "usd",
+        "buy": 156.20,
+        "sell": 169.44
+      },
+      {
+        "platform": "kraken",
+        "currency": "cny",
+        "buy": 22201.32,
+        "sell": 22543.22
+      }
+    ],
+    "calculate": {
+      "kraken": {
+        "sellratio": 0.21,
+        "buyratio": 0.12
+      },
+      "bitfinex": {
+        "sellratio": 0.13,
+        "buyratio": 0.24
+      }
     }
   },
-  "kraken":{
-    "cny":{
-      "latest":22505.43,
-      "buy":22504.23,
-      "sell":22521.22,
-      "high":22750,
-      "low":21691,
-      "vol":12244.09
-    }
-  }
+  "cnyusdratio":6.45
 }
