@@ -138,18 +138,25 @@ We use mariaDB(same as MySQL).
         "currency": "cny",
         "buy": 22201.32,
         "sell": 22543.22
+      },{
+         "platform": "bitfinex",
+         "currency": "cny",
+         "buy": 20001.32,
+         "sell": 19943.22
       }
     ],
-    "calculate": {
-      "kraken": {
+    "calculate": [
+      {
+        "platform":"kraken",
         "sellratio": 0.021,
         "buyratio": 0.012
       },
-      "bitfinex": {
+      {
+        "platform":"bitfinex",
         "sellratio": 0.13,
         "buyratio": 0.24
       }
-    }
+    ]
   },
   "cnyusdratio":6.45
 }

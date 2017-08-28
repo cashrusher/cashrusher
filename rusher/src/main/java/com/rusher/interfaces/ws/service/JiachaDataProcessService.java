@@ -2,10 +2,7 @@ package com.rusher.interfaces.ws.service;
 
 import com.google.common.collect.Lists;
 import com.rusher.Authorization;
-import com.rusher.interfaces.dto.AssetResponse;
-import com.rusher.interfaces.dto.Detail;
-import com.rusher.interfaces.dto.PlatformAsset;
-import com.rusher.interfaces.dto.Total;
+import com.rusher.interfaces.dto.*;
 import com.rusher.kraken.service.KrakenService;
 import com.rusher.okcoin.dto.Funds;
 import com.rusher.okcoin.dto.OKCoinAsset;
@@ -26,8 +23,8 @@ import java.util.List;
  * Author: Liam
  * Date: 2017/8/23
  */
-@Service("assetProcessService")
-public class AssetProcessService implements WebServiceRequestProcessService<AssetResponse, Object> {
+@Service("jiachadataProcessService")
+public class JiachaDataProcessService implements WebServiceRequestProcessService<JiaChaDataResponse, Object> {
     private final Log logger = LogFactory.getLog("ERR_LOG");
     @Autowired
     private KrakenService krakenService;
@@ -39,7 +36,7 @@ public class AssetProcessService implements WebServiceRequestProcessService<Asse
     private YunBiService yunBiService;
 
     @Override
-    public Object processPost(AssetResponse response, WebServiceRequestMessage message) {
+    public Object processPost(JiaChaDataResponse response, WebServiceRequestMessage message) {
         OKCoinAsset okCoinAsset = okCoinService.getAsset(new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
 
         return null;

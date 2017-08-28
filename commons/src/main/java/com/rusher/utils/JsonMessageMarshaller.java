@@ -5,7 +5,7 @@ import com.rusher.ws.WebServiceMessageMarshaller;
 
 /**
  * Author: Liam
- * Date: 2016/9/30
+ * Date: 2017/8/30
  */
 public class JsonMessageMarshaller extends WebServiceMessageMarshaller {
     private Class clazz;

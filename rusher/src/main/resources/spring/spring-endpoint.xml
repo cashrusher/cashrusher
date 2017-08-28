@@ -11,13 +11,13 @@
         <constructor-arg index="4" ref="assetProcessService"/>
     </bean>
 
-    <!--<bean id="otaQueryRequestEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">-->
-    <!--<constructor-arg index="0" ref="otaRequestMessageReader"/>-->
-    <!--<constructor-arg index="1" ref="otaRequestReplyWriter"/>-->
-    <!--<constructor-arg index="2" ref="otaRequestValidator"/>-->
-    <!--<constructor-arg index="3" ref="otaQueryRequestMessageMarshaller"/>-->
-    <!--<constructor-arg index="4" ref="jsonQueryProcessService"/>-->
-    <!--</bean>-->
+    <bean id="jiachadataProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
+    <constructor-arg index="0" ref="otaRequestMessageReader"/>
+    <constructor-arg index="1" ref="otaRequestReplyWriter"/>
+    <constructor-arg index="2" ref="otaRequestValidator"/>
+    <constructor-arg index="3" ref="jiachadataMessageMarshaller"/>
+    <constructor-arg index="4" ref="jiachadataProcessService"/>
+    </bean>
 
     <!--<bean id="otaCancelRequestEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">-->
     <!--<constructor-arg index="0" ref="otaRequestMessageReader"/>-->
@@ -47,6 +47,12 @@
         <constructor-arg value="com.rusher.interfaces.dto.AssetResponse"/>
         <constructor-arg ref="objectMapper"/>
     </bean>
+
+    <bean id="jiachadataMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">
+        <constructor-arg value="com.rusher.interfaces.dto.JiaChaDataResponse"/>
+        <constructor-arg ref="objectMapper"/>
+    </bean>
+
 
     <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
 
