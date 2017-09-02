@@ -31,7 +31,7 @@ API 遵从RestFul风格，使用JSON数据传输格式，URL以及JSON数据的�
 
 ## 获取个人资产
 
-    URL:  http://35.164.34.250/rusher/json/asset
+    URL:  http://52.41.94.237/rusher/json/asset
     HTTP GET
     
   每个平台的小记功能由前端算出，人民币和美元保留2位小数，其他的虚拟货币保留6位
@@ -91,7 +91,7 @@ API 遵从RestFul风格，使用JSON数据传输格式，URL以及JSON数据的�
 platform      :前端只能传输["okcoin","yunbi","kraken","bitbinex"]
 fetchrate     :只能为整数，单位为xx秒／次，代表市场行情的后台刷新频率，即调用第三方网站的接口的频率
 
-    URL:  http://35.164.34.250/rusher/settings/platform
+    URL:  http://52.41.94.237/rusher/settings/platform
     HTTP POST
   
   Request
@@ -116,7 +116,7 @@ fetchrate     :只能为整数，单位为xx秒／次，代表市场行情的后
 platform      :前端只能传输["okcoin","yunbi","kraken","bitbinex"]
 accessKey 以及 secretKey 不能包含空格
 
-    URL:  http://35.164.34.250/rusher/settings/testconnection
+    URL:  http://52.41.94.237/rusher/settings/testconnection
     HTTP POST
   
   Request
@@ -152,7 +152,7 @@ accessKey 以及 secretKey 不能包含空格
 
 前端每隔5秒调用一次此接口，如果此接口返回true，则前端应该立刻调用一次 <价差套利数据展示接口> 来更新价差套利的数据展示
 
-    URL:  http://35.164.34.250/rusher/threshold_trigger/jiacha
+    URL:  http://52.41.94.237/rusher/threshold_trigger/jiacha
     HTTP GET
   
   Response
@@ -166,7 +166,7 @@ accessKey 以及 secretKey 不能包含空格
 
 前端页面每隔10s调用一次，通过此接口来获取最新数据并刷新页面展示。
 
-    URL:  http://35.164.34.250/rusher/data/jiacha
+    URL:  http://52.41.94.237/rusher/data/jiacha
     HTTP GET
   
   Response
@@ -235,7 +235,7 @@ accessKey 以及 secretKey 不能包含空格
 用于页面汇率的设置，此处始终为人民币对外币的汇率，即1元人民币对等值的多少外币，如  {"cnyusd":0.1526},代表1元人民币等于0.1526美元。
 所有数值为浮点型，四舍五入保留4位小数。
 
-    URL:  http://35.164.34.250/rusher/settings/exchange_rate
+    URL:  http://52.41.94.237/rusher/settings/exchange_rate
     HTTP POST
   
   Request
@@ -263,7 +263,7 @@ accessKey 以及 secretKey 不能包含空格
 用于前端页面汇率的获取，此处始终为人民币对外币的汇率，即1元人民币对等值的多少外币，如  {"cnyusd":0.1526},代表1元人民币等于0.1526美元。
 所有数值为浮点型，四舍五入保留4位小数。
 
-    URL:  http://35.164.34.250/rusher/settings/exchange_rate
+    URL:  http://52.41.94.237/rusher/settings/exchange_rate
     HTTP GET
   
   Response
@@ -285,7 +285,7 @@ accessKey 以及 secretKey 不能包含空格
 
 "auto":true   代表需要自动化，反之代表不需要自动化
 
-    URL:  http://35.164.34.250/rusher/settings/auto
+    URL:  http://52.41.94.237/rusher/settings/auto
     HTTP POST
   
   Request
@@ -312,7 +312,7 @@ maxbuy_bitbinexsell : 国内最大买一／bitbinex卖一
 maxsell_bitbinexbuy : 国内最大卖一／bitbinex买一
 maxbuy_minsell : 国内最大买一／国内最小卖一
   
-    URL:  http://35.164.34.250/rusher/settings/threshold
+    URL:  http://52.41.94.237/rusher/settings/threshold
     HTTP POST
   
   Request
@@ -345,7 +345,7 @@ maxbuy_bitbinexsell : 国内最大买一／bitbinex卖一
 maxsell_bitbinexbuy : 国内最大卖一／bitbinex买一
 maxbuy_minsell : 国内最大买一／国内最小卖一
   
-    URL:  http://35.164.34.250/rusher/settings/threshold
+    URL:  http://52.41.94.237/rusher/settings/threshold
     HTTP Get
   
   Response
