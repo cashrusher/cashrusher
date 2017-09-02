@@ -1,5 +1,6 @@
-package com.rusher.model.db;
+package com.rusher.interfaces.model.db;
 
+import com.rusher.Platform;
 import com.rusher.db.PersistenceSupport;
 
 import javax.persistence.*;
@@ -31,8 +32,8 @@ import javax.persistence.*;
 public class Ticker extends PersistenceSupport {
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
-    private Platform platform = Platform.ALL;
+    @Column(length = 20, nullable = true)
+    private Platform platform = null;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)

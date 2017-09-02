@@ -43,7 +43,7 @@
         </property>
         <property name="packagesToScan">
             <list>
-                <value>com.rusher.model</value>
+                <value>com.rusher.interfaces.model</value>
             </list>
         </property>
     </bean>

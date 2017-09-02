@@ -1,8 +1,11 @@
-package com.rusher.model.db;
+package com.rusher.interfaces.model.db;
 
+import com.rusher.Platform;
 import com.rusher.db.PersistenceSupport;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by liam on 19/08/2017.
@@ -26,7 +29,7 @@ import javax.persistence.*;
 public class APIAuth extends PersistenceSupport {
 
     @Column(nullable = false)
-    private String platform;
+    private Platform platform;
 
     @Column(nullable = false)
     private String apikey;
@@ -34,18 +37,18 @@ public class APIAuth extends PersistenceSupport {
     @Column(nullable = false)
     private String secretkey;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String tpaextension;
 
     public String getApikey() {
         return apikey;
     }
 
-    public String getPlatform() {
+    public Platform getPlatform() {
         return platform;
     }
 
-    public void setPlatform(String platform) {
+    public void setPlatform(Platform platform) {
         this.platform = platform;
     }
 

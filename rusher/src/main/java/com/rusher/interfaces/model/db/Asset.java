@@ -1,5 +1,6 @@
-package com.rusher.model.db;
+package com.rusher.interfaces.model.db;
 
+import com.rusher.Platform;
 import com.rusher.db.PersistenceSupport;
 
 import javax.persistence.*;
@@ -30,8 +31,8 @@ public class Asset extends PersistenceSupport {
     private String user;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
-    private Platform platform = Platform.ALL;
+    @Column(length = 20, nullable = true)
+    private Platform platform = null;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)
