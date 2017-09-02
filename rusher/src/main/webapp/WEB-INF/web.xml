@@ -34,7 +34,14 @@
         <servlet-name>assetProcessEndpoint</servlet-name>
         <url-pattern>/json/asset</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>testConnectionProcessEndpoint</servlet-name>
+        <servlet-class>com.rusher.servlet.DelegatingServletProxy</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>testConnectionProcessEndpoint</servlet-name>
+        <url-pattern>/settings/testconnection</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>jiachadataProcessEndpoint</servlet-name>

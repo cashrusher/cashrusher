@@ -1,10 +1,21 @@
 package com.rusher;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by liam on 19/08/2017.
  */
 public enum Platform {
-    OKCOIN("okcoin"), BTCTRADE("bictrade"), KRAKEN("kraken"), YUNBI("yunbi"), HUOBI("huobi");
+    @JsonProperty("okcoin")
+    OKCOIN("okcoin"),
+    @JsonProperty("kraken")
+    KRAKEN("kraken"),
+    @JsonProperty("yunbi")
+    YUNBI("yunbi"),
+    @JsonProperty("huobi")
+    HUOBI("huobi"),
+    @JsonProperty("bitfinex")
+    BITFINEX("bitfinex");
     private String platform;
 
     Platform(String platform) {

@@ -1,5 +1,8 @@
 package com.rusher.ws;
 
+import com.rusher.IOUtils;
+import com.rusher.http.HttpHeaderHelper;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
@@ -19,12 +22,11 @@ public abstract class HttpRequestHelper {
     }
 
     public static byte[] getContent(HttpServletRequest httpServletRequest) throws IOException {
-//        if (HttpHeaderHelper.hasContentLength(httpServletRequest)) {
-//            return IOUtils.readBytes(httpServletRequest.getInputStream(), HttpHeaderHelper.getContentLength(httpServletRequest));
-//        } else {
-//            return IOUtils.readBytes(httpServletRequest.getInputStream());
-//        }
-        return null;
+        if (HttpHeaderHelper.hasContentLength(httpServletRequest)) {
+            return IOUtils.readBytes(httpServletRequest.getInputStream(), HttpHeaderHelper.getContentLength(httpServletRequest));
+        } else {
+            return IOUtils.readBytes(httpServletRequest.getInputStream());
+        }
     }
 
     public static String toRequestMessage(Map<String, Object> request, String charset) {

@@ -97,8 +97,8 @@ fetchrate     :只能为整数，单位为xx秒／次，代表市场行情的后
   Request
   ```json
   {
-    "accessKey":"jkdksdljsdljfye",
-    "secretKey":"9829087292",
+    "accesskey":"jkdksdljsdljfye",
+    "secretkey":"9829087292",
     "platform":"okcoin",
     "fetchrate": 3
   }
@@ -114,7 +114,7 @@ fetchrate     :只能为整数，单位为xx秒／次，代表市场行情的后
 ## 设置页面的测试链接功能
 
 platform      :前端只能传输["okcoin","yunbi","kraken","bitbinex"]
-accessKey 以及 secretKey 不能包含空格
+accesskey 以及 secretkey 不能包含空格
 
     URL:  http://52.41.94.237/rusher/settings/testconnection
     HTTP POST
@@ -122,8 +122,8 @@ accessKey 以及 secretKey 不能包含空格
   Request
   ```json
   {
-     "accessKey":"jkdksdljsdljfye",
-     "secretKey":"9829087292",
+     "accesskey":"jkdksdljsdljfye",
+     "secretkey":"9829087292",
      "platform":"okcoin"
   }
   ```
