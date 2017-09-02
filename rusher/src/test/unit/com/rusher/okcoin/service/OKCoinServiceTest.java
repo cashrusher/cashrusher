@@ -14,7 +14,7 @@ import org.junit.Test;
 public class OKCoinServiceTest {
 
     private Authorization authorization;
-    private JsonMessageMarshaller marshaller = new JsonMessageMarshaller(null, new ObjectMapper());
+    private JsonMessageMarshaller marshaller = new JsonMessageMarshaller(new ObjectMapper());
     private OKCoinService service = new OKCoinService();
 
     @Before

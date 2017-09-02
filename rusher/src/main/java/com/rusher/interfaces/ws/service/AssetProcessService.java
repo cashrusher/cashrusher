@@ -41,7 +41,6 @@ public class AssetProcessService implements WebServiceRequestProcessService<Asse
     @Override
     public Object processPost(AssetResponse response, WebServiceRequestMessage message) {
         OKCoinAsset okCoinAsset = okCoinService.getAsset(new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
-
         return null;
     }
 

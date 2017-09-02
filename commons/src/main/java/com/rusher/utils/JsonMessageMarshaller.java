@@ -8,14 +8,12 @@ import com.rusher.ws.WebServiceMessageMarshaller;
  * Date: 2017/8/30
  */
 public class JsonMessageMarshaller extends WebServiceMessageMarshaller {
-    private Class clazz;
     private ObjectMapper mapper;
 
     public JsonMessageMarshaller() {
     }
 
-    public JsonMessageMarshaller(Class clazz, ObjectMapper objectMapper) {
-        this.clazz = clazz;
+    public JsonMessageMarshaller(ObjectMapper objectMapper) {
         this.mapper = objectMapper;
     }
 
@@ -25,10 +23,6 @@ public class JsonMessageMarshaller extends WebServiceMessageMarshaller {
     }
 
     @Override
-    public Object doUnmarshal(String value) throws Exception {
-        return mapper.readValue(value, clazz);
-    }
-
     public Object doUnmarshal(String value, Class clazz) throws Exception {
         return mapper.readValue(value, clazz);
     }

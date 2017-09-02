@@ -15,7 +15,7 @@ public class WebServiceMessageJsonMarshaller extends WebServiceMessageMarshaller
     }
 
     @Override
-    protected Object doUnmarshal(String value) {
+    public Object doUnmarshal(String value, Class clazz) {
 //        return JsonUtils.toObject(value, responseClass);
         return null;
 

@@ -7,7 +7,7 @@
         <constructor-arg index="0" ref="otaRequestMessageReader"/>
         <constructor-arg index="1" ref="otaRequestReplyWriter"/>
         <constructor-arg index="2" ref="otaRequestValidator"/>
-        <constructor-arg index="3" ref="assetRequestMessageMarshaller"/>
+        <constructor-arg index="3" ref="messageMarshaller"/>
         <constructor-arg index="4" ref="assetProcessService"/>
     </bean>
 
@@ -15,7 +15,7 @@
     <constructor-arg index="0" ref="otaRequestMessageReader"/>
     <constructor-arg index="1" ref="otaRequestReplyWriter"/>
     <constructor-arg index="2" ref="otaRequestValidator"/>
-    <constructor-arg index="3" ref="jiachadataMessageMarshaller"/>
+    <constructor-arg index="3" ref="messageMarshaller"/>
     <constructor-arg index="4" ref="jiachadataProcessService"/>
     </bean>
 
@@ -43,13 +43,7 @@
     </bean>
 
     <!--JSON-->
-    <bean id="assetRequestMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">
-        <constructor-arg value="com.rusher.interfaces.dto.AssetResponse"/>
-        <constructor-arg ref="objectMapper"/>
-    </bean>
-
-    <bean id="jiachadataMessageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">
-        <constructor-arg value="com.rusher.interfaces.dto.JiaChaDataResponse"/>
+    <bean id="messageMarshaller" class="com.rusher.utils.JsonMessageMarshaller">
         <constructor-arg ref="objectMapper"/>
     </bean>
 

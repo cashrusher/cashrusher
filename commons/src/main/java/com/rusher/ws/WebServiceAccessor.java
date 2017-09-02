@@ -31,7 +31,8 @@ public abstract class WebServiceAccessor {
 //    }
 
     protected <RS> RS unmarshal(String rsMessage) {
-        return (RS) marshaller.unmarshal(rsMessage);
+//        return (RS) marshaller.unmarshal(rsMessage);
+        return null;
     }
 
     protected String beforeSend(String rqMessage) {

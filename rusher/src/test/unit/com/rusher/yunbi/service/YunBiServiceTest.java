@@ -16,7 +16,7 @@ public class YunBiServiceTest {
     @Before
     public void setUp() throws Exception {
         service.setYunbiAPI(new YunBiAPI());
-        service.setMarshaller(new JsonMessageMarshaller(null,new ObjectMapper()));
+        service.setMarshaller(new JsonMessageMarshaller(new ObjectMapper()));
     }
 
     @Test

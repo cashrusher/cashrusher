@@ -46,8 +46,7 @@ public class WebServiceRequestEndPoint extends HttpServlet {
                 return;
             }
             final WebServiceRequestMessage message = reader.read(httpServletRequest);
-            final Object request = marshaller.unmarshal(WebServiceRequestMessageHelper.toString(message));
-            final Object response = processService.processPost(request, message);
+            final Object response = processService.processPost(WebServiceRequestMessageHelper.toString(message), message);
             write(httpServletRequest, httpServletResponse, message.getCharset(), marshaller.marshal(response));
         } catch (Throwable e) {
             writeException(httpServletRequest, httpServletResponse, reader.getRequestCharset(httpServletRequest), e);
