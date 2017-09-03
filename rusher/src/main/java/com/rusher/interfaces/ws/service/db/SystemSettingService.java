@@ -1,8 +1,12 @@
 package com.rusher.interfaces.ws.service.db;
 
+import com.rusher.interfaces.dto.ExchangeKey;
 import com.rusher.interfaces.model.db.SystemSetting;
 import com.rusher.service.CommonService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by liam on 02/09/2017.
@@ -11,9 +15,19 @@ import org.springframework.stereotype.Service;
 public class SystemSettingService extends CommonService<SystemSetting> {
 
     public void UpdateSystemSetting(int fetchRate) {
-        SystemSetting systemSetting = new SystemSetting();
-        systemSetting.setId(1L);
+        SystemSetting systemSetting = load(1L);
         systemSetting.setFetchRate(fetchRate);
+        save(systemSetting);
+    }
+
+    public void UpdateSystemSetting(List<Map<ExchangeKey, Double>> exchangeSetting) {
+        SystemSetting systemSetting = load(1L);
+        for (Map<ExchangeKey, Double> keyDoubleMap : exchangeSetting) {
+            Double cnyusd = keyDoubleMap.get(ExchangeKey.CNYUSD);
+            if (cnyusd != null) {
+                systemSetting.setCnyusd(cnyusd.doubleValue());
+            }
+        }
         save(systemSetting);
     }
 }

@@ -17,12 +17,21 @@ public class SystemSetting extends PersistenceSupport {
 
     private int fetchRate;
 
+    private double cnyusd;
 
     public static SystemSetting DefaultSetting() {
         SystemSetting systemSetting = new SystemSetting();
         systemSetting.setId(1L);
         systemSetting.setFetchRate(10);
         return systemSetting;
+    }
+
+    public double getCnyusd() {
+        return cnyusd;
+    }
+
+    public void setCnyusd(double cnyusd) {
+        this.cnyusd = cnyusd;
     }
 
     public int getFetchRate() {

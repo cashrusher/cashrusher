@@ -18,6 +18,7 @@
         <constructor-arg index="3" ref="messageMarshaller"/>
         <constructor-arg index="4" ref="jiachadataProcessService"/>
     </bean>
+
     <bean id="testConnectionProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
         <constructor-arg index="0" ref="otaRequestMessageReader"/>
         <constructor-arg index="1" ref="otaRequestReplyWriter"/>
@@ -25,12 +26,21 @@
         <constructor-arg index="3" ref="messageMarshaller"/>
         <constructor-arg index="4" ref="testConnectionProcessService"/>
     </bean>
+
     <bean id="connectionSettingProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
         <constructor-arg index="0" ref="otaRequestMessageReader"/>
         <constructor-arg index="1" ref="otaRequestReplyWriter"/>
         <constructor-arg index="2" ref="otaRequestValidator"/>
         <constructor-arg index="3" ref="messageMarshaller"/>
         <constructor-arg index="4" ref="connectionSettingProcessService"/>
+    </bean>
+
+    <bean id="exchangeRateSettingProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
+        <constructor-arg index="0" ref="otaRequestMessageReader"/>
+        <constructor-arg index="1" ref="otaRequestReplyWriter"/>
+        <constructor-arg index="2" ref="otaRequestValidator"/>
+        <constructor-arg index="3" ref="messageMarshaller"/>
+        <constructor-arg index="4" ref="exchangeRateSettingProcessService"/>
     </bean>
     <!--<bean id="otaCancelRequestEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">-->
     <!--<constructor-arg index="0" ref="otaRequestMessageReader"/>-->
