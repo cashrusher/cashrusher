@@ -30,4 +30,8 @@ public class SystemSettingService extends CommonService<SystemSetting> {
         }
         save(systemSetting);
     }
+
+    public SystemSetting getSystemSetting() {
+        return load(1L);
+    }
 }

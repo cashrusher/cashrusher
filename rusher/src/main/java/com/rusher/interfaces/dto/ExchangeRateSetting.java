@@ -15,7 +15,7 @@ import java.util.Map;
 //        {"cnyjyp":16.8100}
 //        ]
 //        }
-public class ExchangeRateSettingRequest {
+public class ExchangeRateSetting {
 
     @JsonProperty("exchangerate")
     private List<Map<ExchangeKey, Double>> exchangeRate;

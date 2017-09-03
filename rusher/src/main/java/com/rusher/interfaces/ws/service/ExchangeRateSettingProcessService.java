@@ -1,8 +1,12 @@
 package com.rusher.interfaces.ws.service;
 
-import com.rusher.interfaces.dto.ExchangeRateSettingRequest;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.rusher.interfaces.dto.ExchangeKey;
+import com.rusher.interfaces.dto.ExchangeRateSetting;
 import com.rusher.interfaces.dto.SettingResponse;
 import com.rusher.interfaces.dto.Status;
+import com.rusher.interfaces.model.db.SystemSetting;
 import com.rusher.interfaces.ws.service.db.SystemSettingService;
 import com.rusher.interfaces.ws.support.ErrorResponseSupport;
 import com.rusher.utils.JsonMessageMarshaller;
@@ -13,6 +17,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Author: Liam
@@ -32,7 +39,7 @@ public class ExchangeRateSettingProcessService implements WebServiceRequestProce
     @Transactional(readOnly = false)
     public Object processPost(String request, WebServiceRequestMessage message) {
         try {
-            ExchangeRateSettingRequest settingRequest = (ExchangeRateSettingRequest) marshaller.doUnmarshal(request, ExchangeRateSettingRequest.class);
+            ExchangeRateSetting settingRequest = (ExchangeRateSetting) marshaller.doUnmarshal(request, ExchangeRateSetting.class);
             settingService.UpdateSystemSetting(settingRequest.getExchangeRate());
             return new SettingResponse(Status.Success);
         } catch (Exception e) {
@@ -43,7 +50,19 @@ public class ExchangeRateSettingProcessService implements WebServiceRequestProce
     }
 
     @Override
+    @Transactional(readOnly = false)
     public Object processGet() {
-        return null;
+        SystemSetting systemSetting = settingService.getSystemSetting();
+        ExchangeRateSetting exchangeRateSetting = new ExchangeRateSetting();
+        exchangeRateSetting.setExchangeRate(createExchangeRate(systemSetting));
+        return exchangeRateSetting;
+    }
+
+    private List<Map<ExchangeKey, Double>> createExchangeRate(SystemSetting systemSetting) {
+        List<Map<ExchangeKey, Double>> exchangeKeyMaps = Lists.newArrayList();
+        Map<ExchangeKey, Double> map = Maps.newConcurrentMap();
+        map.put(ExchangeKey.CNYUSD, systemSetting.getCnyusd());
+        exchangeKeyMaps.add(map);
+        return exchangeKeyMaps;
     }
 }
