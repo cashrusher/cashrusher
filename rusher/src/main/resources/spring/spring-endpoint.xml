@@ -35,6 +35,14 @@
         <constructor-arg index="4" ref="connectionSettingProcessService"/>
     </bean>
 
+    <bean id="thresholdSettingProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
+        <constructor-arg index="0" ref="otaRequestMessageReader"/>
+        <constructor-arg index="1" ref="otaRequestReplyWriter"/>
+        <constructor-arg index="2" ref="otaRequestValidator"/>
+        <constructor-arg index="3" ref="messageMarshaller"/>
+        <constructor-arg index="4" ref="thresholdSettingProcessService"/>
+    </bean>
+
     <bean id="exchangeRateSettingProcessEndpoint" class="com.rusher.interfaces.ws.endpoint.WebServiceRequestEndPoint">
         <constructor-arg index="0" ref="otaRequestMessageReader"/>
         <constructor-arg index="1" ref="otaRequestReplyWriter"/>

@@ -70,6 +70,15 @@
         <url-pattern>/settings/exchange_rate</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>thresholdSettingProcessEndpoint</servlet-name>
+        <servlet-class>com.rusher.servlet.DelegatingServletProxy</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>thresholdSettingProcessEndpoint</servlet-name>
+        <url-pattern>/settings/threshold</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>openEntityManagerInView</filter-name>
         <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>

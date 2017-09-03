@@ -321,8 +321,8 @@ maxbuy_minsell : 国内最大买一／国内最小卖一
 {
   "maxbuy_krakensell":1.80,
   "maxsell_krakenbuy":1.73,
-  "maxbuy_bitbinexsell":2.12,
-  "maxsell_bitbinexbuy":2.13,
+  "maxbuy_bitfinexsell":2.12,
+  "maxsell_bitfinexbuy":2.13,
   "maxbuy_minsell":1.98
 }
   ```
@@ -354,8 +354,8 @@ maxbuy_minsell : 国内最大买一／国内最小卖一
 {
   "maxbuy_krakensell":1.80,
   "maxsell_krakenbuy":1.73,
-  "maxbuy_bitbinexsell":2.12,
-  "maxsell_bitbinexbuy":2.13,
+  "maxbuy_bitfinexsell":2.12,
+  "maxsell_bitfinexbuy":2.13,
   "maxbuy_minsell":1.98
 }
   ```
