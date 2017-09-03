@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 //        "maxsell_bitfinexbuy":2.13,
 //        "maxbuy_minsell":1.98
 //        }
-public class ThresholdSettingRequest {
+public class ThresholdSetting {
     @JsonProperty("maxbuy_krakensell")
     private double maxBuyKrakenSell;
 

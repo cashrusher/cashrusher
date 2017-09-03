@@ -2,7 +2,8 @@ package com.rusher.interfaces.ws.service;
 
 import com.rusher.interfaces.dto.SettingResponse;
 import com.rusher.interfaces.dto.Status;
-import com.rusher.interfaces.dto.ThresholdSettingRequest;
+import com.rusher.interfaces.dto.ThresholdSetting;
+import com.rusher.interfaces.model.db.SystemSetting;
 import com.rusher.interfaces.ws.service.db.SystemSettingService;
 import com.rusher.interfaces.ws.support.ErrorResponseSupport;
 import com.rusher.utils.JsonMessageMarshaller;
@@ -32,7 +33,7 @@ public class ThresholdSettingProcessService implements WebServiceRequestProcessS
     @Transactional(readOnly = false)
     public Object processPost(String request, WebServiceRequestMessage message) {
         try {
-            ThresholdSettingRequest settingRequest = (ThresholdSettingRequest) marshaller.doUnmarshal(request, ThresholdSettingRequest.class);
+            ThresholdSetting settingRequest = (ThresholdSetting) marshaller.doUnmarshal(request, ThresholdSetting.class);
             settingService.UpdateSystemSetting(settingRequest);
             return new SettingResponse(Status.Success);
         } catch (Exception e) {
@@ -43,7 +44,15 @@ public class ThresholdSettingProcessService implements WebServiceRequestProcessS
     }
 
     @Override
+    @Transactional(readOnly = false)
     public Object processGet() {
-        return null;
+        SystemSetting systemSetting = settingService.getSystemSetting();
+        ThresholdSetting thresholdSetting=new ThresholdSetting();
+        thresholdSetting.setMaxSellKrakenBuy(systemSetting.getMaxSellKrakenBuy());
+        thresholdSetting.setMaxBuyMinSell(systemSetting.getMaxBuyMinSell());
+        thresholdSetting.setMaxBuyKrakenSell(systemSetting.getMaxBuyKrakenSell());
+        thresholdSetting.setMaxBuyBitfinexSell(systemSetting.getMaxBuyBitfinexSell());
+        thresholdSetting.setMaxSellBitfinexBuy(systemSetting.getMaxSellBitFinexBuy());
+        return thresholdSetting;
     }
 }

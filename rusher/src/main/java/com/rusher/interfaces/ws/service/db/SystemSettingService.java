@@ -1,7 +1,7 @@
 package com.rusher.interfaces.ws.service.db;
 
 import com.rusher.interfaces.dto.ExchangeKey;
-import com.rusher.interfaces.dto.ThresholdSettingRequest;
+import com.rusher.interfaces.dto.ThresholdSetting;
 import com.rusher.interfaces.model.db.SystemSetting;
 import com.rusher.service.CommonService;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class SystemSettingService extends CommonService<SystemSetting> {
         save(systemSetting);
     }
 
-    public void UpdateSystemSetting(ThresholdSettingRequest request) {
+    public void UpdateSystemSetting(ThresholdSetting request) {
         SystemSetting systemSetting = load(1L);
         systemSetting.setMaxBuyBitfinexSell(request.getMaxBuyBitfinexSell());
         systemSetting.setMaxBuyKrakenSell(request.getMaxBuyKrakenSell());
