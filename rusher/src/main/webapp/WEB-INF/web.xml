@@ -58,7 +58,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>jiachadataProcessEndpoint</servlet-name>
-        <url-pattern>/json/jiachadata</url-pattern>
+        <url-pattern>/data/jiacha</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -75,7 +75,7 @@
         <servlet-class>com.rusher.servlet.DelegatingServletProxy</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>thresholdSettingProcessEndpoint</servlet-name>
+        <servlet-name>exchangeRateSettingProcessEndpoint</servlet-name>
         <url-pattern>/settings/threshold</url-pattern>
     </servlet-mapping>
 
