@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class KrakenService {
-
-    public KrakenAsset getAsset() {
-        return null;
-    }
+  public static final String APIURL = "https://api.kraken.com";
+  
+  public KrakenAsset getAsset() {
+    return null;
+  }
 }
