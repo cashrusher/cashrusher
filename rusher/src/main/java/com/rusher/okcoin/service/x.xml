@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:door="http://www.derbysoft.com/doorway">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <door:QueryReservationRequest Token="fac786b4-c48a-456a-bba5-6c396b613522" UserName="MEITUAN"
+                                      Password="aBa9BaZvM9LVEkaN">
+            <door:ReservationId DerbysoftReservationId="" HotelReservationId=""
+                                DistributorReservationId="90072049068726033"/>
+        </door:QueryReservationRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

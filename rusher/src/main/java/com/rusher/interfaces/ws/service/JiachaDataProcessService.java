@@ -3,7 +3,7 @@ package com.rusher.interfaces.ws.service;
 import com.google.common.collect.Lists;
 import com.rusher.Authorization;
 import com.rusher.interfaces.dto.*;
-import com.rusher.kraken.service.KrakenService;
+import com.rusher.kraken.service.KrakenServiceImpl;
 import com.rusher.okcoin.dto.Funds;
 import com.rusher.okcoin.dto.OKCoinAsset;
 import com.rusher.okcoin.service.OKCoinService;
@@ -27,7 +27,7 @@ import java.util.List;
 public class JiachaDataProcessService implements WebServiceRequestProcessService<JiaChaDataResponse, Object> {
     private final Log logger = LogFactory.getLog("ERR_LOG");
     @Autowired
-    private KrakenService krakenService;
+    private KrakenServiceImpl krakenService;
 
     @Autowired
     private OKCoinService okCoinService;

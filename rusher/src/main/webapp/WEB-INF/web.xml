@@ -75,7 +75,7 @@
         <servlet-class>com.rusher.servlet.DelegatingServletProxy</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>exchangeRateSettingProcessEndpoint</servlet-name>
+        <servlet-name>thresholdSettingProcessEndpoint</servlet-name>
         <url-pattern>/settings/threshold</url-pattern>
     </servlet-mapping>
 

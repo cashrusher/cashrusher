@@ -6,7 +6,7 @@ import com.rusher.interfaces.dto.AssetResponse;
 import com.rusher.interfaces.dto.Detail;
 import com.rusher.interfaces.dto.PlatformAsset;
 import com.rusher.interfaces.dto.Total;
-import com.rusher.kraken.service.KrakenService;
+import com.rusher.kraken.service.KrakenServiceImpl;
 import com.rusher.okcoin.dto.Funds;
 import com.rusher.okcoin.dto.OKCoinAsset;
 import com.rusher.okcoin.service.OKCoinService;
@@ -30,7 +30,7 @@ import java.util.List;
 public class AssetProcessService implements WebServiceRequestProcessService<AssetResponse, Object> {
     private final Log logger = LogFactory.getLog("ERR_LOG");
     @Autowired
-    private KrakenService krakenService;
+    private KrakenServiceImpl krakenService;
 
     @Autowired
     private OKCoinService okCoinService;

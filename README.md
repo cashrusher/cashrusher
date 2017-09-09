@@ -390,3 +390,42 @@ maxbuy_minsell : 国内最大买一／国内最小卖一
 ## Error Message
 
 具体的错误描述信息
+
+
+
+# 其他业务知识记录
+
+## Kraken
+USD：美元 ETH：以太坊 xbt：比特币
+
+首字母含义
+X：代表数字货币
+Z：现实货币，如人民币，美元，加拿大币等
+
+"BCH": "0",
+"DASH": "0",
+"EOS": "0",
+"GNO": "0",
+"KFEE": "0",
+"USDT": "0",
+"XDAO": "0",
+"XETC": "0",
+"XETH": "0",
+"XICN": "0",
+"XLTC": "0",
+"XMLN": "0",
+"XNMC": "0",
+"XREP": "0",
+"XXBT": "0",
+"XXDG": "0",
+"XXLM": "0",
+"XXMR": "0",
+"XXRP": "0",
+"XXVN": "0",
+"XZEC": "0",
+"ZCAD": "0",
+"ZEUR": "0",
+"ZGBP": "0",
+"ZJPY": "0",
+"ZKRW": "0",
+"ZUSD": "0"

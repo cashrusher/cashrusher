@@ -26,138 +26,173 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 封装HTTP get post请求，简化发送http请求
- * @author zhangchi
  *
+ * @author zhangchi
  */
 public class HttpUtilManager {
 
-	private static HttpUtilManager instance = new HttpUtilManager();
-	private static HttpClient client;
-	private static long startTime = System.currentTimeMillis();
-	public  static PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();  
-	private static ConnectionKeepAliveStrategy keepAliveStrat = new DefaultConnectionKeepAliveStrategy() {  
+    private static HttpUtilManager instance = new HttpUtilManager();
+    private static HttpClient client;
+    private static long startTime = System.currentTimeMillis();
+    public static PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+    private static ConnectionKeepAliveStrategy keepAliveStrat = new DefaultConnectionKeepAliveStrategy() {
 
-	     public long getKeepAliveDuration(  
-	            HttpResponse response,  
-	            HttpContext context) {  
-	        long keepAlive = super.getKeepAliveDuration(response, context);  
-	        
-	        if (keepAlive == -1) {  
-	            keepAlive = 5000;  
-	        }  
-	        return keepAlive;  
-	    }  
-	  
-	};
-	private HttpUtilManager() {
-		client = HttpClients.custom().setConnectionManager(cm).setKeepAliveStrategy(keepAliveStrat).build(); 
-	}
+        public long getKeepAliveDuration(
+                HttpResponse response,
+                HttpContext context) {
+            long keepAlive = super.getKeepAliveDuration(response, context);
 
-    public static void IdleConnectionMonitor(){
-		
-		if(System.currentTimeMillis()-startTime>30000){
-			 startTime = System.currentTimeMillis();
-			 cm.closeExpiredConnections();  
-             cm.closeIdleConnections(30, TimeUnit.SECONDS);
-		}
-	}
-	 
-	private static RequestConfig requestConfig = RequestConfig.custom()
-	        .setSocketTimeout(20000)
-	        .setConnectTimeout(20000)
-	        .setConnectionRequestTimeout(20000)
-	        .build();
-	
-	
-	public static HttpUtilManager getInstance() {
-		return instance;
-	}
+            if (keepAlive == -1) {
+                keepAlive = 5000;
+            }
+            return keepAlive;
+        }
 
-	public HttpClient getHttpClient() {
-		return client;
-	}
+    };
 
-	private HttpPost httpPostMethod(String url) {
-		return new HttpPost(url);
-	}
+    private HttpUtilManager() {
+        client = HttpClients.custom().setConnectionManager(cm).setKeepAliveStrategy(keepAliveStrat).build();
+    }
 
-	private  HttpRequestBase httpGetMethod(String url) {
-		return new  HttpGet(url);
-	}
-	
-	public String requestHttpGet(String url_prex,String url,String param) throws HttpException, IOException{
-		
-		IdleConnectionMonitor();
-		url=url_prex+url;
-		if(param!=null && !param.equals("")){
-		        if(url.endsWith("?")){
-			    url = url+param;
-			}else{
-			    url = url+"?"+param;
-			}
-		}
-		HttpRequestBase method = this.httpGetMethod(url);
-		method.setConfig(requestConfig);
-		HttpResponse response = client.execute(method);
-		HttpEntity entity =  response.getEntity();
-		if(entity == null){
-			return "";
-		}
-		InputStream is = null;
-		String responseData = "";
-		try{
-		    is = entity.getContent();
-		    responseData = IOUtils.toString(is, "UTF-8");
-		}finally{
-			if(is!=null){
-			    is.close();
-			}
-		}
-		return responseData;
-	}
-	
-	public String requestHttpPost(String url_prex,String url,Map<String,String> params) throws HttpException, IOException{
-		
-		IdleConnectionMonitor();
-		url=url_prex+url;
-		HttpPost method = this.httpPostMethod(url);
-		List<NameValuePair> valuePairs = this.convertMap2PostParams(params);
-		UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(valuePairs, Consts.UTF_8);
-		method.setEntity(urlEncodedFormEntity);
-		method.setConfig(requestConfig);
-		HttpResponse response = client.execute(method);
-		HttpEntity entity =  response.getEntity();
-		if(entity == null){
-			return "";
-		}
-		InputStream is = null;
-		String responseData = "";
-		try{
-		    is = entity.getContent();
-		    responseData = IOUtils.toString(is, "UTF-8");
-		}finally{
-			if(is!=null){
-			    is.close();
-			}
-		}
-		return responseData;
-		
-	}
-	
-	private List<NameValuePair> convertMap2PostParams(Map<String,String> params){
-		List<String> keys = new ArrayList<String>(params.keySet());
-		if(keys.isEmpty()){
-			return null;
-		}
-		int keySize = keys.size();
-		List<NameValuePair>  data = new LinkedList<NameValuePair>() ;
-		for(int i=0;i<keySize;i++){
-			String key = keys.get(i);
-			String value = params.get(key);
-			data.add(new BasicNameValuePair(key,value));
-		}
-		return data;
-	}
+    public static void IdleConnectionMonitor() {
+
+        if (System.currentTimeMillis() - startTime > 30000) {
+            startTime = System.currentTimeMillis();
+            cm.closeExpiredConnections();
+            cm.closeIdleConnections(30, TimeUnit.SECONDS);
+        }
+    }
+
+    private static RequestConfig requestConfig = RequestConfig.custom()
+            .setSocketTimeout(20000)
+            .setConnectTimeout(20000)
+            .setConnectionRequestTimeout(20000)
+            .build();
+
+
+    public static HttpUtilManager getInstance() {
+        return instance;
+    }
+
+    public HttpClient getHttpClient() {
+        return client;
+    }
+
+    private HttpPost httpPostMethod(String url) {
+        return new HttpPost(url);
+    }
+
+    private HttpRequestBase httpGetMethod(String url) {
+        return new HttpGet(url);
+    }
+
+    public String requestHttpGet(String url_prex, String url, String param) throws HttpException, IOException {
+
+        IdleConnectionMonitor();
+        url = url_prex + url;
+        if (param != null && !param.equals("")) {
+            if (url.endsWith("?")) {
+                url = url + param;
+            } else {
+                url = url + "?" + param;
+            }
+        }
+        HttpRequestBase method = this.httpGetMethod(url);
+        method.setConfig(requestConfig);
+        HttpResponse response = client.execute(method);
+        HttpEntity entity = response.getEntity();
+        if (entity == null) {
+            return "";
+        }
+        InputStream is = null;
+        String responseData = "";
+        try {
+            is = entity.getContent();
+            responseData = IOUtils.toString(is, "UTF-8");
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+        return responseData;
+    }
+
+    public String requestHttpPost(String url_prex, String url, Map<String, String> params) throws HttpException, IOException {
+
+        IdleConnectionMonitor();
+        url = url_prex + url;
+        HttpPost method = this.httpPostMethod(url);
+        List<NameValuePair> valuePairs = this.convertMap2PostParams(params);
+        UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(valuePairs, Consts.UTF_8);
+        method.setEntity(urlEncodedFormEntity);
+        method.setConfig(requestConfig);
+        byte[] bs = new byte[method.getEntity().getContent().available()];
+        method.getEntity().getContent().read(bs);
+        String str = bs.toString();
+        HttpResponse response = client.execute(method);
+        HttpEntity entity = response.getEntity();
+        if (entity == null) {
+            return "";
+        }
+        InputStream is = null;
+        String responseData = "";
+        try {
+            is = entity.getContent();
+            responseData = IOUtils.toString(is, "UTF-8");
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+        return responseData;
+
+    }
+
+    public String requestHttpPost(String url_prex, String url, Map<String, String> params, Map<String, String> header) throws HttpException, IOException {
+
+        IdleConnectionMonitor();
+        url = url_prex + url;
+        HttpPost method = this.httpPostMethod(url);
+        List<NameValuePair> valuePairs = this.convertMap2PostParams(params);
+        UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(valuePairs, Consts.UTF_8);
+        method.setEntity(urlEncodedFormEntity);
+        method.setConfig(requestConfig);
+        for (String key : header.keySet()) {
+            method.setHeader(key, header.get(key));
+        }
+        HttpResponse response = client.execute(method);
+        HttpEntity entity = response.getEntity();
+        if (entity == null) {
+            return "";
+        }
+        InputStream is = null;
+        String responseData = "";
+        try {
+            is = entity.getContent();
+            responseData = IOUtils.toString(is, "UTF-8");
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+        return responseData;
+
+    }
+
+    private List<NameValuePair> convertMap2PostParams(Map<String, String> params) {
+        List<String> keys = new ArrayList<String>(params.keySet());
+        if (keys.isEmpty()) {
+            return null;
+        }
+        int keySize = keys.size();
+        List<NameValuePair> data = new LinkedList<NameValuePair>();
+        for (int i = 0; i < keySize; i++) {
+            String key = keys.get(i);
+            String value = params.get(key);
+            data.add(new BasicNameValuePair(key, value));
+        }
+        return data;
+    }
 
 }
 

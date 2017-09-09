@@ -1,15 +1,16 @@
 package com.rusher.kraken.service;
 
-import org.springframework.stereotype.Service;
+import com.rusher.kraken.dto.KrakenBalance;
+import com.rusher.kraken.dto.KrakenTicker;
+import com.rusher.kraken.dto.KrakenTradeRequest;
 
 /**
- * Author: Liam
- * Date: 2017/8/23
+ * Created by liam on 09/09/2017.
  */
-@Service
-public class KrakenService {
+public interface KrakenService {
+    public KrakenBalance getBalance();
 
-    public KrakenAsset getAsset() {
-        return null;
-    }
+    public KrakenTicker getTicker(String ...pairs);
+
+    public void Trade(KrakenTradeRequest request);
 }

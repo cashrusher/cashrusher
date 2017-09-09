@@ -6,7 +6,7 @@ import com.rusher.interfaces.dto.Status;
 import com.rusher.interfaces.dto.TestConnectionRequest;
 import com.rusher.interfaces.dto.TestConnectionResponse;
 import com.rusher.interfaces.ws.support.ErrorResponseSupport;
-import com.rusher.kraken.service.KrakenService;
+import com.rusher.kraken.service.KrakenServiceImpl;
 import com.rusher.okcoin.dto.OKCoinAsset;
 import com.rusher.okcoin.service.OKCoinService;
 import com.rusher.utils.JsonMessageMarshaller;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 public class ConnectionTestingProcessService implements WebServiceRequestProcessService<String, Object> {
     private final Log logger = LogFactory.getLog("ERR_LOG");
     @Autowired
-    private KrakenService krakenService;
+    private KrakenServiceImpl krakenService;
 
     @Autowired
     private OKCoinService okCoinService;
