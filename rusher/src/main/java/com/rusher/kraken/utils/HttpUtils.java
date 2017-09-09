@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.rusher.kraken.service.KrakenService.APIURL;
+import static com.rusher.kraken.service.KrakenService.key;
+import static com.rusher.kraken.service.KrakenService.secret;
 import static com.rusher.kraken.utils.Signature.createSignature;
 
 /**
@@ -16,30 +19,23 @@ import static com.rusher.kraken.utils.Signature.createSignature;
 public class HttpUtils {
 
     public static String queryPrivate(String urlPath, Map<String, String> values) throws Exception {
-        String urlPrex = "https://api.kraken.com";
-        String secret = "WP90951w5I9uFCLabh8x0SqaKaqeTCe+orIez89Io/68R8i9Xh5lnQeSOsXtlTpf4KJ+ryf8kRMFHyRzuBpfSg==";
         byte[] secretDecode = Base64.decodeBase64(secret);
         values.put("nonce", String.valueOf(System.currentTimeMillis() * 1000000));
         String signature = createSignature(urlPath, values, secretDecode);
-
-        System.out.println(signature);
-        String content = post(urlPrex, urlPath, values, signature);
-        System.out.println(content);
+        String content = post(APIURL + urlPath, values, key, signature);
         return content;
     }
 
-    public static String post(String urlPrex, String urlPath, Map<String, String> params, String signature) {
+    public static String post(String url, Map<String, String> params, String key, String signature) {
         // 构造参数签名
         Map<String, String> header = new HashMap<String, String>();
-        header.put("API-Key", "RNL8qrMdKy+wRwCCR7cm5xHN09Bsew3snZIN3aW3rlnLPvtHTkCKvS+u");
+        header.put("API-Key", key);
         header.put("API-Sign", signature);
 
         // 发送post请求
         HttpUtilManager httpUtil = HttpUtilManager.getInstance();
         try {
-            String result = httpUtil.requestHttpPost(urlPrex, urlPath, params, header);
-            System.out.println(result);
-            return result;
+            return httpUtil.requestHttpPost(url, params, header);
         } catch (HttpException e) {
             e.printStackTrace();
         } catch (IOException e) {

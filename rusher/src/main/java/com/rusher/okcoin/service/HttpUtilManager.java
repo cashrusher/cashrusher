@@ -148,10 +148,8 @@ public class HttpUtilManager {
 
     }
 
-    public String requestHttpPost(String url_prex, String url, Map<String, String> params, Map<String, String> header) throws HttpException, IOException {
-
+    public String requestHttpPost(String url, Map<String, String> params, Map<String, String> header) throws HttpException, IOException {
         IdleConnectionMonitor();
-        url = url_prex + url;
         HttpPost method = this.httpPostMethod(url);
         List<NameValuePair> valuePairs = this.convertMap2PostParams(params);
         UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(valuePairs, Consts.UTF_8);
@@ -160,6 +158,9 @@ public class HttpUtilManager {
         for (String key : header.keySet()) {
             method.setHeader(key, header.get(key));
         }
+        byte[] bs = new byte[method.getEntity().getContent().available()];
+        method.getEntity().getContent().read(bs);
+        String str = bs.toString();
         HttpResponse response = client.execute(method);
         HttpEntity entity = response.getEntity();
         if (entity == null) {

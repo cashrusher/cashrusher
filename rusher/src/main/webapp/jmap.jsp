@@ -158,9 +158,9 @@
             if (n > number) {
                 continue;
             }
-            var v = tds[n].innerHTML;
-            v = v.replace("&nbsp;", "").replace("&nbsp;", "").trim() / 1024;
-            tds[n].innerHTML = "&nbsp;" + v + "MB&nbsp;";
+            var volume = tds[n].innerHTML;
+            volume = volume.replace("&nbsp;", "").replace("&nbsp;", "").trim() / 1024;
+            tds[n].innerHTML = "&nbsp;" + volume + "MB&nbsp;";
         }
     }
 </script>

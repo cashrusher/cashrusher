@@ -1,9 +1,7 @@
 package com.rusher.kraken.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rusher.kraken.dto.KrakenBalance;
-import com.rusher.kraken.dto.KrakenTicker;
-import com.rusher.kraken.dto.Pairs;
+import com.rusher.kraken.dto.*;
 import com.rusher.utils.JsonMessageMarshaller;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +27,22 @@ public class KrakenServiceImplTest {
 
     @Test
     public void trade() throws Exception {
+        KrakenTradeRequest request = createRequest(Type.sell);
+        KrakenTradeResponse response = service.Trade(request);
+        System.out.println(marshaller.marshal(response));
 
+        request = createRequest(Type.buy);
+        response = service.Trade(request);
+        System.out.println(marshaller.marshal(response));
+    }
+
+    private KrakenTradeRequest createRequest(Type type) {
+        KrakenTradeRequest request = new KrakenTradeRequest();
+        request.setPair(Pairs.XETHZUSD);
+        request.setType(type);
+        request.setOrderType(OrderType.MARKET);
+        request.setVolume(0.02d);
+        return request;
     }
 
     @Test

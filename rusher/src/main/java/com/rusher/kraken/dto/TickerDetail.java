@@ -9,108 +9,126 @@ import java.util.List;
  * {"error":[],
  * "result":{
  *      "XETHZUSD":{
- *          "a":["308.75000","1","1.000"],
- *          "b":["307.30000","20","20.000"],
- *          "c":["308.12000","0.88080000"],
- *          "v":["14954.22445640","97271.42597282"],
- *          "p":["306.15693","310.71689"],
- *          "t":[4555,19473],
- *          "l":["300.10000","295.22000"],
- *          "h":["312.00000","336.68000"],
- *          "o":"310.49000"
+ *          "ask":["308.75000","1","1.000"],
+ *          "bid":["307.30000","20","20.000"],
+ *          "close":["308.12000","0.88080000"],
+ *          "volume":["14954.22445640","97271.42597282"],
+ *          "volumeAveragePrice":["306.15693","310.71689"],
+ *          "trades":[4555,19473],
+ *          "low":["300.10000","295.22000"],
+ *          "high":["312.00000","336.68000"],
+ *          "openingPrice":"310.49000"
  *      }
  * }
  * }
  */
+
 public class TickerDetail {
-    @JsonProperty("a")
-    private List<Double> A;
-    @JsonProperty("b")
-    private List<Double> B;
-    @JsonProperty("c")
-    private List<Double> C;
-    @JsonProperty("v")
-    private List<Double> V;
-    @JsonProperty("p")
-    private List<Double> P;
-    @JsonProperty("t")
-    private List<Double> T;
-    @JsonProperty("l")
-    private List<Double> L;
-    @JsonProperty("h")
-    private List<Double> H;
-    @JsonProperty("o")
-    private Double O;
+    // Ask array(<price>, <whole lot volume>, <lot volume>)
+    @JsonProperty("ask")
+    private List<Double> Ask;
 
-    public List<Double> getA() {
-        return A;
+    //Bid array(<price>, <whole lot volume>, <lot volume>)
+    @JsonProperty("bid")
+    private List<Double> Bid;
+
+    //Last trade closed array(<price>, <lot volume>)
+    @JsonProperty("close")
+    private List<Double> Close;
+
+    //Volume array(<today>, <last 24 hours>)
+    @JsonProperty("volume")
+    private List<Double> Volume;
+
+    //Volume weighted average price array(<today>, <last 24 hours>)
+    @JsonProperty("volumeAveragePrice")
+    private List<Double> VolumeAveragePrice;
+
+    //Number of trades array(<today>, <last 24 hours>)
+    @JsonProperty("trades")
+    private List<Double> Trades;
+
+    //Low array(<today>, <last 24 hours>)
+    @JsonProperty("low")
+    private List<Double> Low;
+
+    //High array(<today>, <last 24 hours>)
+    @JsonProperty("high")
+    private List<Double> High;
+
+    //Today's opening price
+    @JsonProperty("openingPrice")
+    private Double OpeningPrice;
+
+    public List<Double> getAsk() {
+        return Ask;
     }
 
-    public void setA(List<Double> a) {
-        A = a;
+    public void setAsk(List<Double> ask) {
+        Ask = ask;
     }
 
-    public List<Double> getB() {
-        return B;
+    public List<Double> getBid() {
+        return Bid;
     }
 
-    public void setB(List<Double> b) {
-        B = b;
+    public void setBid(List<Double> bid) {
+        Bid = bid;
     }
 
-    public List<Double> getC() {
-        return C;
+    public List<Double> getClose() {
+        return Close;
     }
 
-    public void setC(List<Double> c) {
-        C = c;
+    public void setClose(List<Double> close) {
+        Close = close;
     }
 
-    public List<Double> getV() {
-        return V;
+    public List<Double> getVolume() {
+        return Volume;
     }
 
-    public void setV(List<Double> v) {
-        V = v;
+    public void setVolume(List<Double> volume) {
+        Volume = volume;
     }
 
-    public List<Double> getP() {
-        return P;
+    public List<Double> getVolumeAveragePrice() {
+        return VolumeAveragePrice;
     }
 
-    public void setP(List<Double> p) {
-        P = p;
+    public void setVolumeAveragePrice(List<Double> volumeAveragePrice) {
+        VolumeAveragePrice = volumeAveragePrice;
     }
 
-    public List<Double> getT() {
-        return T;
+    public List<Double> getTrades() {
+        return Trades;
     }
 
-    public void setT(List<Double> t) {
-        T = t;
+    public void setTrades(List<Double> trades) {
+        Trades = trades;
     }
 
-    public List<Double> getL() {
-        return L;
+    public List<Double> getLow() {
+        return Low;
     }
 
-    public void setL(List<Double> l) {
-        L = l;
+    public void setLow(List<Double> low) {
+        Low = low;
     }
 
-    public List<Double> getH() {
-        return H;
+    public List<Double> getHigh() {
+        return High;
     }
 
-    public void setH(List<Double> h) {
-        H = h;
+    public void setHigh(List<Double> high) {
+        High = high;
     }
 
-    public  Double getO() {
-        return O;
+    public  Double getOpeningPrice() {
+        return OpeningPrice;
     }
 
-    public void setO(Double o) {
-        O = o;
+    public void setOpeningPrice(Double openingPrice) {
+        OpeningPrice = openingPrice;
     }
 }

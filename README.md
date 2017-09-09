@@ -173,20 +173,19 @@ accesskey 以及 secretkey 不能包含空格
   ```json
 {
   "mainland": {
-    "tickers": [
-      {
-        "platform": "okcoin",
-        "currency": "cny",
-        "buy": 22504.23,
-        "sell": 22521.22
-      },
-      {
-        "platform": "yunbi",
-        "currency": "cny",
-        "buy": 22201.32,
-        "sell": 22543.22
-      }
-    ],
+    "tickers": {
+      "okcoin":[
+        {  
+           "currency": "cny",
+           "buy": 22504.23,
+           "sell": 22521.22
+         },{
+           "currency": "cny",
+           "buy": 22201.32,
+           "sell": 22543.22
+         }
+        ]    
+    },
     "calculate": {
       "maxsell": 22543.22,
       "minbuy": 22201.32,
@@ -194,25 +193,27 @@ accesskey 以及 secretkey 不能包含空格
     }
   },
   "abroad": {
-    "tickers": [
-      {
-        "platform": "kraken",
-        "currency": "usd",
-        "buy": 156.20,
-        "sell": 169.44
-      },
-      {
-        "platform": "kraken",
-        "currency": "cny",
-        "buy": 22201.32,
-        "sell": 22543.22
-      },{
-         "platform": "bitfinex",
-         "currency": "cny",
-         "buy": 20001.32,
-         "sell": 19943.22
-      }
-    ],
+    "tickers": {
+       "kraken":[
+          {
+             "currency": "usd",
+             "buy": 156.20,
+             "sell": 169.44
+           },
+           {
+             "currency": "cny",
+             "buy": 22201.32,
+             "sell": 22543.22
+           }
+       ],
+       "bitfinex":[
+           {
+             "currency": "cny",
+             "buy": 20001.32,
+             "sell": 19943.22
+            }
+       ]
+     },
     "calculate": [
       {
         "platform":"kraken",
