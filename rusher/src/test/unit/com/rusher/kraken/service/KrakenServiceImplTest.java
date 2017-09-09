@@ -25,15 +25,16 @@ public class KrakenServiceImplTest {
         System.out.println(marshaller.marshal(ticker));
     }
 
+    //这个测试每次会进行0.02ETH的卖出和买入
     @Test
     public void trade() throws Exception {
-        KrakenTradeRequest request = createRequest(Type.sell);
-        KrakenTradeResponse response = service.Trade(request);
-        System.out.println(marshaller.marshal(response));
-
-        request = createRequest(Type.buy);
-        response = service.Trade(request);
-        System.out.println(marshaller.marshal(response));
+//        KrakenTradeRequest request = createRequest(Type.sell);
+//        KrakenTradeResponse response = service.Trade(request);
+//        System.out.println(marshaller.marshal(response));
+//
+//        request = createRequest(Type.buy);
+//        response = service.Trade(request);
+//        System.out.println(marshaller.marshal(response));
     }
 
     private KrakenTradeRequest createRequest(Type type) {

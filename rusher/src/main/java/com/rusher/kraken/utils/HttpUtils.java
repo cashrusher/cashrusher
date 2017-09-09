@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.rusher.kraken.service.KrakenService.APIURL;
-import static com.rusher.kraken.service.KrakenService.key;
-import static com.rusher.kraken.service.KrakenService.secret;
 import static com.rusher.kraken.utils.Signature.createSignature;
 
 /**
@@ -18,7 +16,7 @@ import static com.rusher.kraken.utils.Signature.createSignature;
  */
 public class HttpUtils {
 
-    public static String queryPrivate(String urlPath, Map<String, String> values) throws Exception {
+    public static String queryPrivate(String key, String secret, String urlPath, Map<String, String> values) throws Exception {
         byte[] secretDecode = Base64.decodeBase64(secret);
         values.put("nonce", String.valueOf(System.currentTimeMillis() * 1000000));
         String signature = createSignature(urlPath, values, secretDecode);

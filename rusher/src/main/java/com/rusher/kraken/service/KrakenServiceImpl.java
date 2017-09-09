@@ -1,6 +1,7 @@
 package com.rusher.kraken.service;
 
 import com.google.common.collect.Maps;
+import com.rusher.Authorization;
 import com.rusher.kraken.dto.KrakenBalance;
 import com.rusher.kraken.dto.KrakenTicker;
 import com.rusher.kraken.dto.KrakenTradeRequest;
@@ -24,12 +25,14 @@ public class KrakenServiceImpl implements KrakenService {
     @Autowired
     private JsonMessageMarshaller marshaller;
 
+    private Authorization authorization;
+
     @Override
     public KrakenBalance getBalance() {
         final String url = "/0/private/Balance";
         Map<String, String> params = Maps.newHashMap();
         try {
-            String response = queryPrivate(url, params);
+            String response = queryPrivate(authorization.getApiKey(), authorization.getSecretKey(), url, params);
             System.out.println(response);
             return (KrakenBalance) marshaller.doUnmarshal(response, KrakenBalance.class);
         } catch (Exception e) {
@@ -45,7 +48,7 @@ public class KrakenServiceImpl implements KrakenService {
         params.put("pair", StringUtils.join(pairs, ","));
         System.out.println(params.get("pair"));
         try {
-            String response = queryPrivate(url, params);
+            String response = queryPrivate(authorization.getApiKey(), authorization.getSecretKey(), url, params);
             System.out.println(response);
             return (KrakenTicker) marshaller.doUnmarshal(response, KrakenTicker.class);
         } catch (Exception e) {
@@ -85,12 +88,12 @@ public class KrakenServiceImpl implements KrakenService {
         if (request.getValidate() != null) {
             params.put("validate", request.getValidate());
         }
-//        params.put("close_order_type", request.());
-//        params.put("close_price", request.getPrice());
-//        params.put("close_price2", request.getClosePrice2());
-//        params.put("trading_agreement", request.getTradingAgreement());
+//      params.put("close_order_type", request.());
+//      params.put("close_price", request.getPrice());
+//      params.put("close_price2", request.getClosePrice2());
+//      params.put("trading_agreement", request.getTradingAgreement());
         try {
-            String response = queryPrivate(url, params);
+            String response = queryPrivate(authorization.getApiKey(), authorization.getSecretKey(), url, params);
             System.out.println(response);
             return (KrakenTradeResponse) marshaller.doUnmarshal(response, KrakenTradeResponse.class);
         } catch (Exception e) {
