@@ -1,6 +1,6 @@
 package com.rusher.kraken.utils;
 
-import com.rusher.okcoin.service.HttpUtilManager;
+import com.rusher.utils.HttpUtilManager;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpException;
 

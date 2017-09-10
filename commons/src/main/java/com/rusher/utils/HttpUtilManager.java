@@ -1,4 +1,4 @@
-package com.rusher.okcoin.service;
+package com.rusher.utils;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.*;
@@ -86,10 +86,9 @@ public class HttpUtilManager {
         return new HttpGet(url);
     }
 
-    public String requestHttpGet(String url_prex, String url, String param) throws HttpException, IOException {
+    public String requestHttpGet(String url, String param) throws HttpException, IOException {
 
         IdleConnectionMonitor();
-        url = url_prex + url;
         if (param != null && !param.equals("")) {
             if (url.endsWith("?")) {
                 url = url + param;
@@ -117,10 +116,9 @@ public class HttpUtilManager {
         return responseData;
     }
 
-    public String requestHttpPost(String url_prex, String url, Map<String, String> params) throws HttpException, IOException {
+    public String requestHttpPost(String url, Map<String, String> params) throws HttpException, IOException {
 
         IdleConnectionMonitor();
-        url = url_prex + url;
         HttpPost method = this.httpPostMethod(url);
         List<NameValuePair> valuePairs = this.convertMap2PostParams(params);
         UrlEncodedFormEntity urlEncodedFormEntity = new UrlEncodedFormEntity(valuePairs, Consts.UTF_8);

@@ -2,6 +2,7 @@ package com.rusher.okcoin.service;
 
 import com.rusher.okcoin.utils.MD5Util;
 import com.rusher.okcoin.utils.StringUtil;
+import com.rusher.utils.HttpUtilManager;
 import org.apache.http.HttpException;
 
 import java.io.IOException;
@@ -87,7 +88,7 @@ public class StockRestApiService implements IStockRestApi{
 			}
 			param += "symbol=" + symbol;
 		}
-		String result = httpUtil.requestHttpGet(url_prex, TICKER_URL, param);
+		String result = httpUtil.requestHttpGet(url_prex+TICKER_URL, param);
 	    return result;
 	}
 
@@ -101,7 +102,7 @@ public class StockRestApiService implements IStockRestApi{
 			}
 			param += "symbol=" + symbol;
 		}
-		String result = httpUtil.requestHttpGet(url_prex, this.DEPTH_URL, param);
+		String result = httpUtil.requestHttpGet(url_prex+this.DEPTH_URL, param);
 	    return result;
 	}
 
@@ -121,7 +122,7 @@ public class StockRestApiService implements IStockRestApi{
 			}
 			param += "since=" + since;
 		}
-		String result = httpUtil.requestHttpGet(url_prex, this.TRADES_URL, param);
+		String result = httpUtil.requestHttpGet(url_prex+this.TRADES_URL, param);
 	    return result;
 	}
 
@@ -135,7 +136,7 @@ public class StockRestApiService implements IStockRestApi{
 		
 		// 发送post请求
 		HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-		String result = httpUtil.requestHttpPost(url_prex,this.USERINFO_URL,
+		String result = httpUtil.requestHttpPost(url_prex+this.USERINFO_URL,
 				params);
 
 		return result;
@@ -164,7 +165,7 @@ public class StockRestApiService implements IStockRestApi{
 		
 		// 发送post请求
 		HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-		String result = httpUtil.requestHttpPost(url_prex,this.TRADE_URL,
+		String result = httpUtil.requestHttpPost(url_prex+this.TRADE_URL,
 				params);
 
 		return result;
@@ -190,7 +191,7 @@ public class StockRestApiService implements IStockRestApi{
 		
 		// 发送post请求
 		HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-		String result = httpUtil.requestHttpPost(url_prex,this.BATCH_TRADE_URL,
+		String result = httpUtil.requestHttpPost(url_prex+this.BATCH_TRADE_URL,
 				params);
 
 		return result;
@@ -213,7 +214,7 @@ public class StockRestApiService implements IStockRestApi{
 		
 		// 发送post请求
 		HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-		String result = httpUtil.requestHttpPost(url_prex,this.CANCEL_ORDER_URL,
+		String result = httpUtil.requestHttpPost(url_prex+this.CANCEL_ORDER_URL,
 				params);
 
 		return result;
@@ -236,7 +237,7 @@ public class StockRestApiService implements IStockRestApi{
 		
 		// 发送post请求
 		HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-		String result = httpUtil.requestHttpPost(url_prex,this.ORDER_INFO_URL,
+		String result = httpUtil.requestHttpPost(url_prex+this.ORDER_INFO_URL,
 				params);
 
 		return result;
@@ -263,7 +264,7 @@ public class StockRestApiService implements IStockRestApi{
 		
 		// 发送post请求
 		HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-		String result = httpUtil.requestHttpPost(url_prex,this.ORDERS_INFO_URL,
+		String result = httpUtil.requestHttpPost(url_prex+this.ORDERS_INFO_URL,
 				params);
 
 		return result;
@@ -293,7 +294,7 @@ public class StockRestApiService implements IStockRestApi{
 		
 		// 发送post请求
 		HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-		String result = httpUtil.requestHttpPost(url_prex,this.ORDER_HISTORY_URL,
+		String result = httpUtil.requestHttpPost(url_prex+this.ORDER_HISTORY_URL,
 				params);
 
 		return result;
