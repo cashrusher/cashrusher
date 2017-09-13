@@ -2,15 +2,22 @@ package com.rusher.interfaces.ws.service;
 
 import com.google.common.collect.Lists;
 import com.rusher.Authorization;
+import com.rusher.Currency;
 import com.rusher.interfaces.dto.*;
+import com.rusher.interfaces.model.db.SystemSetting;
+import com.rusher.interfaces.ws.service.db.SystemSettingService;
+import com.rusher.kraken.dto.KrakenTicker;
 import com.rusher.kraken.service.KrakenServiceImpl;
+import com.rusher.kraken.utils.Constant;
 import com.rusher.okcoin.dto.Funds;
 import com.rusher.okcoin.dto.OKCoinAsset;
+import com.rusher.okcoin.dto.OKCoinTicker;
 import com.rusher.okcoin.service.OKCoinService;
 import com.rusher.ws.WebServiceRequestMessage;
 import com.rusher.ws.WebServiceRequestProcessService;
 import com.rusher.yunbi.dto.Account;
 import com.rusher.yunbi.dto.AccountAsset;
+import com.rusher.yunbi.dto.YunBiTicker;
 import com.rusher.yunbi.service.YunBiService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,6 +42,9 @@ public class JiachaDataProcessService implements WebServiceRequestProcessService
     @Autowired
     private YunBiService yunBiService;
 
+    @Autowired
+    private SystemSettingService systemSettingService;
+
     @Override
     public Object processPost(JiaChaDataResponse response, WebServiceRequestMessage message) {
         OKCoinAsset okCoinAsset = okCoinService.getAsset(new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
@@ -44,12 +54,12 @@ public class JiachaDataProcessService implements WebServiceRequestProcessService
 
     @Override
     public Object processGet() {
-        OKCoinAsset okCoinAsset = okCoinService.getAsset(
-                new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
+        OKCoinTicker okCoinTicker = okCoinService.getTicker(Currency.ETH);
+        YunBiTicker yunBiTicker = yunBiService.getTicker(Currency.ETH);
+        KrakenTicker krakenTicker = krakenService.getTicker(Constant.CurrencyAndSymbolMap.get(Currency.ETH));
+        SystemSetting systemSetting = systemSettingService.getSystemSetting();
 
-        Account yunbiAccount = yunBiService.getAccount(
-                new Authorization("WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt", "v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt"));
-        return createAssetResponse(okCoinAsset, yunbiAccount);
+
     }
 
     private AssetResponse createAssetResponse(OKCoinAsset okCoinAsset, Account yunbiAccount) {

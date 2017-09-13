@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.rusher.kraken.service.KrakenService.APIURL;
+import static com.rusher.kraken.utils.Constant.APIURL;
 import static com.rusher.kraken.utils.Signature.createSignature;
 
 /**

@@ -32,7 +32,7 @@ public class KrakenServiceImpl implements KrakenService {
         final String url = "/0/private/Balance";
         Map<String, String> params = Maps.newHashMap();
         try {
-            String response = queryPrivate(authorization.getApiKey(), authorization.getSecretKey(), url, params);
+            String response = queryPrivate(authorization.getApiKey(),authorization.getSecretKey(),url, params);
             System.out.println(response);
             return (KrakenBalance) marshaller.doUnmarshal(response, KrakenBalance.class);
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class KrakenServiceImpl implements KrakenService {
         params.put("pair", StringUtils.join(pairs, ","));
         System.out.println(params.get("pair"));
         try {
-            String response = queryPrivate(authorization.getApiKey(), authorization.getSecretKey(), url, params);
+            String response = queryPrivate(authorization.getApiKey(),authorization.getSecretKey(),url, params);
             System.out.println(response);
             return (KrakenTicker) marshaller.doUnmarshal(response, KrakenTicker.class);
         } catch (Exception e) {
@@ -93,7 +93,7 @@ public class KrakenServiceImpl implements KrakenService {
 //      params.put("close_price2", request.getClosePrice2());
 //      params.put("trading_agreement", request.getTradingAgreement());
         try {
-            String response = queryPrivate(authorization.getApiKey(), authorization.getSecretKey(), url, params);
+            String response = queryPrivate(authorization.getApiKey(),authorization.getSecretKey(),url, params);
             System.out.println(response);
             return (KrakenTradeResponse) marshaller.doUnmarshal(response, KrakenTradeResponse.class);
         } catch (Exception e) {
@@ -103,13 +103,6 @@ public class KrakenServiceImpl implements KrakenService {
 
     }
 
-    public Authorization getAuthorization() {
-        return authorization;
-    }
-
-    public void setAuthorization(Authorization authorization) {
-        this.authorization = authorization;
-    }
 
     public void setMarshaller(JsonMessageMarshaller marshaller) {
         this.marshaller = marshaller;

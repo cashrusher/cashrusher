@@ -9,7 +9,6 @@ import com.rusher.kraken.dto.KrakenTradeResponse;
  * Created by liam on 09/09/2017.
  */
 public interface KrakenService {
-    String APIURL = "https://api.kraken.com";
 
     KrakenBalance getBalance();
 
