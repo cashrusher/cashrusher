@@ -15,6 +15,24 @@
 
 ```
 
+## Linux Server 配置
+
+### 添加用户
+adduser test
+passwd test
+Changing password for user tommy.
+New UNIX password:     //在这里输入新密码
+Retype new UNIX password:  //再次输入新密码
+passwd: all authentication tokens updated successfully.
+
+修改 /etc/sudoers 文件，找到下面一行，在root下面添加一行，如下所示：
+
+`## Allow root to run any commands anywhere`
+root    ALL=(ALL)     ALL
+tommy   ALL=(ALL)     ALL
+
+修改完毕，现在可以用tommy帐号登录，然后用命令 su - ，即可获得root权限进行操作
+
 ## Client for YunBi
 
 https://github.com/peatio/peatio-client-java.git

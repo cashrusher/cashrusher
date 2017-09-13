@@ -103,6 +103,13 @@ public class KrakenServiceImpl implements KrakenService {
 
     }
 
+    public Authorization getAuthorization() {
+        return authorization;
+    }
+
+    public void setAuthorization(Authorization authorization) {
+        this.authorization = authorization;
+    }
 
     public void setMarshaller(JsonMessageMarshaller marshaller) {
         this.marshaller = marshaller;

@@ -1,5 +1,6 @@
 package com.rusher.utils;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
@@ -181,7 +182,7 @@ public class HttpUtilManager {
     private List<NameValuePair> convertMap2PostParams(Map<String, String> params) {
         List<String> keys = new ArrayList<String>(params.keySet());
         if (keys.isEmpty()) {
-            return null;
+            return Lists.newArrayList();
         }
         int keySize = keys.size();
         List<NameValuePair> data = new LinkedList<NameValuePair>();

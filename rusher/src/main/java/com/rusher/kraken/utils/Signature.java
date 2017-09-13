@@ -2,6 +2,7 @@ package com.rusher.kraken.utils;
 
 import com.google.common.primitives.Bytes;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -31,6 +32,13 @@ public class Signature {
         SecretKeySpec secret_key = new SecretKeySpec(secret, "HmacSHA512");
         sha512_HMAC.init(secret_key);
         return Base64.encodeBase64String(sha512_HMAC.doFinal(message));
+    }
+
+    public static String getHMacSha384(byte[] message, byte[] secret) throws Exception {
+        Mac sha384_HMAC = Mac.getInstance("HmacSHA384");
+        SecretKeySpec secret_key = new SecretKeySpec(secret, "HmacSHA384");
+        sha384_HMAC.init(secret_key);
+        return Hex.encodeHexString(sha384_HMAC.doFinal(message));
     }
 
     private static byte[] getSha256(byte[] nonces) {

@@ -14,7 +14,7 @@ import java.util.List;
 public interface BitfinexService {
     String APIURL = "https://api.bitfinex.com";
 
-    BitfinexBalance getBalance();
+    BitfinexBalance getBalance() throws Exception;
 
     List<BitfinexTicker> getTicker(String... pairs);
 

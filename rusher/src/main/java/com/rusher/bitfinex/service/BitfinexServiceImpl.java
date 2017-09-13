@@ -2,16 +2,20 @@ package com.rusher.bitfinex.service;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.rusher.Authorization;
 import com.rusher.bitfinex.dto.BitfinexBalance;
 import com.rusher.bitfinex.dto.BitfinexTicker;
 import com.rusher.bitfinex.dto.BitfinexTradeRequest;
 import com.rusher.bitfinex.dto.BitfinexTradeResponse;
+import com.rusher.bitfinex.exception.BalanceException;
+import com.rusher.kraken.utils.Signature;
 import com.rusher.utils.HttpUtilManager;
 import com.rusher.utils.JsonMessageMarshaller;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by liam on 10/09/2017.
@@ -19,10 +23,12 @@ import java.util.Map;
 @Service
 public class BitfinexServiceImpl implements BitfinexService {
     private HttpUtilManager httpUtil = HttpUtilManager.getInstance();
+    private Authorization authorization;
 
     private JsonMessageMarshaller marshaller = new JsonMessageMarshaller();
 
     /**
+     * 参考Bitfinex官网的BitfinexBalance结构应为如下结构：
      * WALLET_TYPE	string	Wallet name (exchange, margin, funding)
      * CURRENCY	string	Currency (fUSD, etc)
      * BALANCE	float	Wallet balance
@@ -30,35 +36,53 @@ public class BitfinexServiceImpl implements BitfinexService {
      * BALANCE_AVAILABLE	float / null	Amount not tied up in active orders, positions or funding (null if the value is not fresh enough).
      */
     @Override
-    public BitfinexBalance getBalance() {
+    public BitfinexBalance getBalance() throws Exception {
         final String url = APIURL + "/v2/auth/r/wallets";
-        /**
-         req.Header.Add("Content-Type", "application/json")
-         req.Header.Add("Accept", "application/json")
-         req.Header.Add("X-BFX-APIKEY", c.APIKey)
-         req.Header.Add("X-BFX-PAYLOAD", encoded)
-         req.Header.Add("X-BFX-SIGNATURE", c.signPayload(encoded))
 
-         func (c *Client) signPayload(payload string) string {
-         sig := hmac.New(sha512.New384, []byte(c.APISecret))
-         sig.Write([]byte(payload))
-         return hex.EncodeToString(sig.Sum(nil))
-         }
-         */
-
-
+        String nonce = String.valueOf(System.currentTimeMillis() * 1000000);
         Map<String, String> header = Maps.newHashMap();
         header.put("Content-Type", "application/json");
         header.put("Accept", "application/json");
-        header.put("X-BFX-APIKEY", APIKey);
-        header.put("X-BFX-PAYLOAD", encoded);
-        header.put("X-BFX-SIGNATURE", signPayload(encoded));
+        header.put("bfx-nonce", nonce);
+        header.put("bfx-apikey", authorization.getApiKey());
+        // 参考官网js的示例代码组成加密所需要的payload：  /api/${apiPath}${nonce}${rawBody}
+        String payload = "/api/v2/auth/r/wallets" + nonce + "";
+        header.put("bfx-signature", Signature.getHMacSha384(payload.getBytes(), authorization.getSecretKey().getBytes()));
 
+        String content = httpUtil.requestHttpPost(url, Maps.newHashMap(), header);
+        System.out.println(content);
+        List<List<Object>> objectList = (List) marshaller.doUnmarshal(content, List.class);
+
+        if (objectList.size() == 0) {
+            String exceptionMsg = "";
+            for (Object o : objectList) {
+                exceptionMsg += o + ",";
+            }
+            throw new BalanceException("Can not get balance params: " + exceptionMsg.substring(0, exceptionMsg.length() > 0 ? exceptionMsg.length() - 1 : 0));
+        }
+        for (List<Object> objects : objectList) {
+            if (Objects.equals((String) objects.get(1), "ETH")) {
+                BitfinexBalance balance = new BitfinexBalance();
+                balance.setWalletType((String) objects.get(0));
+                balance.setCurrency((String) objects.get(1));
+                balance.setBalance(getDouble(objects.get(2)));
+                balance.setUnsettledInterest(getDouble(objects.get(3)));
+                balance.setBalanceAvailable(getDouble(objects.get(4)));
+                return balance;
+            }
+        }
         return null;
     }
 
-    private String signPayload(String encoded) {
-        return "";
+    private Double getDouble(Object object) {
+        if (object instanceof Double) {
+            return (Double) object;
+        } else if (object instanceof Integer) {
+            return 1.0 * (Integer) object;
+        } else if (object instanceof String) {
+            return Double.valueOf((String) object);
+        }
+        return -1.0;
     }
 
     /**
@@ -125,10 +149,19 @@ public class BitfinexServiceImpl implements BitfinexService {
 
     @Override
     public BitfinexTradeResponse Trade(BitfinexTradeRequest request) {
+
         return null;
     }
 
     public void setMarshaller(JsonMessageMarshaller marshaller) {
         this.marshaller = marshaller;
+    }
+
+    public Authorization getAuthorization() {
+        return authorization;
+    }
+
+    public void setAuthorization(Authorization authorization) {
+        this.authorization = authorization;
     }
 }
