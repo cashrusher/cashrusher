@@ -12,6 +12,13 @@ public class Error {
     @JsonProperty("message")
     private String message;
 
+    public Error() {
+    }
+
+    public Error(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 
     public String getCode() {
         return code;

@@ -29,7 +29,7 @@ public class KrakenTicker {
     private List<Map<String, String>> error;
 
     @JsonProperty("result")
-    private Map<String, TickerDetail> result;
+    private Map<Pairs, TickerDetail> result;
 
 
     public List<Map<String, String>> getError() {
@@ -40,11 +40,11 @@ public class KrakenTicker {
         this.error = error;
     }
 
-    public Map<String, TickerDetail> getResult() {
+    public Map<Pairs, TickerDetail> getResult() {
         return result;
     }
 
-    public void setResult(Map<String, TickerDetail> result) {
+    public void setResult(Map<Pairs, TickerDetail> result) {
         this.result = result;
     }
 }

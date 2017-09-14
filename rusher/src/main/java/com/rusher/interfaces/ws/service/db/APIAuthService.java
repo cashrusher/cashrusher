@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by liam on 02/09/2017.
  */
 @Service
-public class KeyService extends CommonService<APIAuth> {
+public class APIAuthService extends CommonService<APIAuth> {
 
   @Transactional
-  public void UpdateAPIAuth(Platform platform, String secretKey, String accessKey) {
+  public void updateAPIAuth(Platform platform, String secretKey, String accessKey) {
     APIAuth apiAuth = commonRepository.load(APIAuth.class, "platform", platform);
     if (apiAuth == null) {
       apiAuth = new APIAuth();
@@ -22,5 +22,10 @@ public class KeyService extends CommonService<APIAuth> {
     apiAuth.setPlatform(platform);
     apiAuth.setSecretkey(secretKey);
     save(apiAuth);
+  }
+
+  @Transactional(readOnly = true)
+  public APIAuth getAPIAuth(Platform platform) {
+    return commonRepository.load(APIAuth.class, "platform", platform);
   }
 }

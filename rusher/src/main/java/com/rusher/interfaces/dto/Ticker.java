@@ -5,6 +5,7 @@ import com.rusher.Currency;
 import com.rusher.Platform;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by liam on 27/08/2017.
@@ -22,50 +23,47 @@ import java.util.Date;
  * }
  */
 public class Ticker {
-    @JsonProperty("platform")
-    private Platform platform;
+  @JsonProperty("error")
+  private Error error;
 
-    @JsonProperty("currency")
-    private Currency currency;
+  @JsonProperty("platform")
+  private Platform platform;
 
-    @JsonProperty("date")
-    private Date date;
+  @JsonProperty("date")
+  private Date date;
 
-    @JsonProperty("buy")
-    private double buy;
+  @JsonProperty("buysellcurrency")
+  private List<BuySellCurrency> buySellCurrencies;
 
-    @JsonProperty("sell")
-    private double sell;
+  public Platform getPlatform() {
+    return platform;
+  }
 
-    public Platform getPlatform() {
-        return platform;
-    }
+  public void setPlatform(Platform platform) {
+    this.platform = platform;
+  }
 
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
-    }
+  public Date getDate() {
+    return date;
+  }
 
-    public Date getDate() {
-        return date;
-    }
+  public void setDate(Date date) {
+    this.date = date;
+  }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+  public List<BuySellCurrency> getBuySellCurrencies() {
+    return buySellCurrencies;
+  }
 
-    public double getBuy() {
-        return buy;
-    }
+  public void setBuySellCurrencies(List<BuySellCurrency> buySellCurrencies) {
+    this.buySellCurrencies = buySellCurrencies;
+  }
 
-    public void setBuy(double buy) {
-        this.buy = buy;
-    }
+  public Error getError() {
+    return error;
+  }
 
-    public double getSell() {
-        return sell;
-    }
-
-    public void setSell(double sell) {
-        this.sell = sell;
-    }
+  public void setError(Error error) {
+    this.error = error;
+  }
 }
