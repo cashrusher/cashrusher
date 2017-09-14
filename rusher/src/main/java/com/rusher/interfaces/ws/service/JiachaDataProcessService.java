@@ -58,8 +58,7 @@ public class JiachaDataProcessService implements WebServiceRequestProcessService
         YunBiTicker yunBiTicker = yunBiService.getTicker(Currency.ETH);
         KrakenTicker krakenTicker = krakenService.getTicker(Constant.CurrencyAndSymbolMap.get(Currency.ETH));
         SystemSetting systemSetting = systemSettingService.getSystemSetting();
-
-
+        return null;
     }
 
     private AssetResponse createAssetResponse(OKCoinAsset okCoinAsset, Account yunbiAccount) {

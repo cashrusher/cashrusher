@@ -33,6 +33,6 @@ public class AlgorithmSupportJiaCha {
     }
 
     public static boolean isReachJiaChaThreshold(Ticker highestBuy, Ticker lowestSell, SystemSetting systemSetting) {
-        
+        return false;
     }
 }

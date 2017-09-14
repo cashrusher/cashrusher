@@ -67,7 +67,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>thresholdTriggerProcessEndpoint</servlet-name>
-        <url-pattern>threshold_trigger/jiacha</url-pattern>
+        <url-pattern>/threshold_trigger/jiacha</url-pattern>
     </servlet-mapping>
 
     <servlet>

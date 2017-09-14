@@ -9,6 +9,7 @@ import com.rusher.interfaces.ws.support.ErrorResponseSupport;
 import com.rusher.utils.JsonMessageMarshaller;
 import com.rusher.ws.WebServiceRequestMessage;
 import com.rusher.ws.WebServiceRequestProcessService;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +22,33 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("connectionSettingProcessService")
 public class ConnectionSettingProcessService implements WebServiceRequestProcessService<String, Object> {
-    private final Log logger = LogFactory.getLog("ERR_LOG");
+  private final Log logger = LogFactory.getLog("ERR_LOG");
 
-    @Autowired
-    private KeyService keyService;
+  @Autowired
+  private KeyService keyService;
 
-    @Autowired
-    private SystemSettingService settingService;
+  @Autowired
+  private SystemSettingService settingService;
 
-    @Autowired
-    private JsonMessageMarshaller marshaller;
+  @Autowired
+  private JsonMessageMarshaller marshaller;
 
-    @Override
-    @Transactional(readOnly = false)
-    public Object processPost(String request, WebServiceRequestMessage message) {
-        try {
-            SettingRequest settingRequest = (SettingRequest) marshaller.doUnmarshal(request, SettingRequest.class);
-            keyService.UpdateAPIAuth(settingRequest.getPlatform(), settingRequest.getSecretKey(), settingRequest.getAccessKey());
-            settingService.UpdateSystemSetting(settingRequest.getFetchRate());
-            return new SettingResponse(Status.Success);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ErrorResponseSupport.create("System", "Can not set the value due to " + e.getMessage());
-        }
+  @Override
+  public Object processPost(String request, WebServiceRequestMessage message) {
+    try {
+      SettingRequest settingRequest = (SettingRequest) marshaller.doUnmarshal(request, SettingRequest.class);
+      keyService.UpdateAPIAuth(settingRequest.getPlatform(), settingRequest.getSecretKey(), settingRequest.getAccessKey());
+      settingService.UpdateSystemSetting(settingRequest.getFetchRate());
+      return new SettingResponse(Status.Success);
+    } catch (Exception e) {
+      logger.error(ExceptionUtils.getRootCauseMessage(e));
+      e.printStackTrace();
+      return ErrorResponseSupport.create("System", "Can not set the value due to " + e.getMessage());
     }
+  }
 
-    @Override
-    public Object processGet() {
-        return null;
-    }
+  @Override
+  public Object processGet() {
+    return null;
+  }
 }
