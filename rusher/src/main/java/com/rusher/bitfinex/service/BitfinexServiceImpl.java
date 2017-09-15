@@ -23,7 +23,6 @@ import java.util.Objects;
 @Service
 public class BitfinexServiceImpl implements BitfinexService {
     private HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-    private Authorization authorization;
 
     private JsonMessageMarshaller marshaller = new JsonMessageMarshaller();
 
@@ -36,7 +35,7 @@ public class BitfinexServiceImpl implements BitfinexService {
      * BALANCE_AVAILABLE	float / null	Amount not tied up in active orders, positions or funding (null if the value is not fresh enough).
      */
     @Override
-    public BitfinexBalance getBalance() throws Exception {
+    public BitfinexBalance getBalance(Authorization authorization) throws Exception {
         final String url = APIURL + "/v2/auth/r/wallets";
 
         String nonce = String.valueOf(System.currentTimeMillis() * 1000000);
@@ -148,7 +147,7 @@ public class BitfinexServiceImpl implements BitfinexService {
     }
 
     @Override
-    public BitfinexTradeResponse Trade(BitfinexTradeRequest request) {
+    public BitfinexTradeResponse Trade(Authorization authorization,BitfinexTradeRequest request) {
 
         return null;
     }
@@ -157,11 +156,4 @@ public class BitfinexServiceImpl implements BitfinexService {
         this.marshaller = marshaller;
     }
 
-    public Authorization getAuthorization() {
-        return authorization;
-    }
-
-    public void setAuthorization(Authorization authorization) {
-        this.authorization = authorization;
-    }
 }

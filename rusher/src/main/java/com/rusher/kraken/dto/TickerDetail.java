@@ -25,39 +25,39 @@ import java.util.List;
 
 public class TickerDetail {
     // Ask array(<price>, <whole lot volume>, <lot volume>)
-    @JsonProperty("ask")
+    @JsonProperty("a")
     private List<Double> Ask;
 
     //Bid array(<price>, <whole lot volume>, <lot volume>)
-    @JsonProperty("bid")
+    @JsonProperty("b")
     private List<Double> Bid;
 
     //Last trade closed array(<price>, <lot volume>)
-    @JsonProperty("close")
+    @JsonProperty("c")
     private List<Double> Close;
 
     //Volume array(<today>, <last 24 hours>)
-    @JsonProperty("volume")
+    @JsonProperty("v")
     private List<Double> Volume;
 
     //Volume weighted average price array(<today>, <last 24 hours>)
-    @JsonProperty("volumeAveragePrice")
+    @JsonProperty("p")
     private List<Double> VolumeAveragePrice;
 
     //Number of trades array(<today>, <last 24 hours>)
-    @JsonProperty("trades")
+    @JsonProperty("t")
     private List<Double> Trades;
 
     //Low array(<today>, <last 24 hours>)
-    @JsonProperty("low")
+    @JsonProperty("l")
     private List<Double> Low;
 
     //High array(<today>, <last 24 hours>)
-    @JsonProperty("high")
+    @JsonProperty("h")
     private List<Double> High;
 
     //Today's opening price
-    @JsonProperty("openingPrice")
+    @JsonProperty("o")
     private Double OpeningPrice;
 
     public List<Double> getAsk() {

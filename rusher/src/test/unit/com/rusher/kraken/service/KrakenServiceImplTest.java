@@ -19,6 +19,7 @@ public class KrakenServiceImplTest {
     @Before
     public void setUp() throws Exception {
         service.setMarshaller(marshaller);
+        service.setAuthorization(authorization);
     }
 
 

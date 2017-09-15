@@ -188,70 +188,69 @@ import java.util.List;
  */
 
 public class Account {
-    // 用户的唯一编号
-    @JSONField(name = "sn")
-    private String uniqueID;
-    // 用户名字
-    @JSONField(name = "name")
-    private String name;
-    // 用户邮件地址
-    @JSONField(name = "email")
-    private String email;
-    // 用户是否已激活
-    @JSONField(name = "activated")
-    private Boolean isActivated;
-    // 用户的注册ID
-    @JSONField(name = "memo")
-    private String registID;
-    //用户的所有资产
-    @JSONField(name = "accounts")
-    private List<AccountAsset> accountAssets;
+  @JSONField(name = "sn")
+  private String uniqueID;
 
-    public String getUniqueID() {
-        return uniqueID;
-    }
+  @JSONField(name = "name")
+  private String name;
 
-    public void setUniqueID(String uniqueID) {
-        this.uniqueID = uniqueID;
-    }
+  @JSONField(name = "email")
+  private String email;
 
-    public String getRegistID() {
-        return registID;
-    }
+  @JSONField(name = "activated")
+  private Boolean isActivated;
 
-    public void setRegistID(String registID) {
-        this.registID = registID;
-    }
+  @JSONField(name = "memo")
+  private String registID;
 
-    public String getName() {
-        return name;
-    }
+  @JSONField(name = "accounts")
+  private List<AccountAsset> accountAssets;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getUniqueID() {
+    return uniqueID;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public void setUniqueID(String uniqueID) {
+    this.uniqueID = uniqueID;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public String getRegistID() {
+    return registID;
+  }
 
-    public Boolean getActivated() {
-        return isActivated;
-    }
+  public void setRegistID(String registID) {
+    this.registID = registID;
+  }
 
-    public void setActivated(Boolean activated) {
-        isActivated = activated;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public List<AccountAsset> getAccountAssets() {
-        return accountAssets;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setAccountAssets(List<AccountAsset> accountAssets) {
-        this.accountAssets = accountAssets;
-    }
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public Boolean getActivated() {
+    return isActivated;
+  }
+
+  public void setActivated(Boolean activated) {
+    isActivated = activated;
+  }
+
+  public List<AccountAsset> getAccountAssets() {
+    return accountAssets;
+  }
+
+  public void setAccountAssets(List<AccountAsset> accountAssets) {
+    this.accountAssets = accountAssets;
+  }
 }

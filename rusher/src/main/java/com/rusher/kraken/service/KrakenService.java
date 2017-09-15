@@ -1,5 +1,8 @@
 package com.rusher.kraken.service;
 
+import com.rusher.Authorization;
+import com.rusher.Currency;
+import com.rusher.interfaces.dto.Ticker;
 import com.rusher.kraken.dto.KrakenBalance;
 import com.rusher.kraken.dto.KrakenTicker;
 import com.rusher.kraken.dto.KrakenTradeRequest;
@@ -10,9 +13,11 @@ import com.rusher.kraken.dto.KrakenTradeResponse;
  */
 public interface KrakenService {
 
-    KrakenBalance getBalance();
+  KrakenBalance getBalance(Authorization authorization);
 
-    KrakenTicker getTicker(String... pairs);
+  Ticker getTicker(Currency currency);
 
-    KrakenTradeResponse Trade(KrakenTradeRequest request);
+  KrakenTicker getTicker(String... pairs);
+
+  KrakenTradeResponse Trade(Authorization authorization, KrakenTradeRequest request);
 }

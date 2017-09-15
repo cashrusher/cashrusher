@@ -5,5 +5,5 @@ package com.rusher.interfaces.model;
  * Date: 2017/9/14
  */
 public class Constant {
-  public static final String SYSTEM = "system";
+  public static final String SYSTEM = "System";
 }

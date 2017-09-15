@@ -1,4 +1,4 @@
-package com.rusher.interfaces.ws.service;
+package com.rusher.interfaces.ws.endpoint;
 
 import com.rusher.interfaces.dto.SettingRequest;
 import com.rusher.interfaces.dto.SettingResponse;

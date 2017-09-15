@@ -23,13 +23,14 @@ import java.util.Map;
  * }
  * }
  */
+
 public class KrakenTicker {
 
     @JsonProperty("error")
     private List<Map<String, String>> error;
 
     @JsonProperty("result")
-    private Map<Pairs, TickerDetail> result;
+    private Map<String, TickerDetail> result;
 
 
     public List<Map<String, String>> getError() {
@@ -40,11 +41,11 @@ public class KrakenTicker {
         this.error = error;
     }
 
-    public Map<Pairs, TickerDetail> getResult() {
+    public Map<String, TickerDetail> getResult() {
         return result;
     }
 
-    public void setResult(Map<Pairs, TickerDetail> result) {
+    public void setResult(Map<String, TickerDetail> result) {
         this.result = result;
     }
 }

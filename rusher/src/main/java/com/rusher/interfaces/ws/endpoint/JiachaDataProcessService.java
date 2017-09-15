@@ -1,23 +1,32 @@
-package com.rusher.interfaces.ws.service;
+package com.rusher.interfaces.ws.endpoint;
 
 import com.google.common.collect.Lists;
 import com.rusher.Authorization;
-import com.rusher.interfaces.dto.AssetResponse;
-import com.rusher.interfaces.dto.Detail;
-import com.rusher.interfaces.dto.PlatformAsset;
-import com.rusher.interfaces.dto.Total;
+import com.rusher.Currency;
+import com.rusher.interfaces.dto.*;
+import com.rusher.interfaces.model.db.SystemSetting;
+import com.rusher.interfaces.ws.service.db.APIAuthService;
+import com.rusher.interfaces.ws.service.db.SystemSettingService;
+import com.rusher.interfaces.ws.support.AlgorithmSupportJiaCha;
+import com.rusher.domain.common.translator.TranslatorEx;
+import com.rusher.domain.common.translator.TranslatorTri;
+import com.rusher.kraken.dto.KrakenTicker;
 import com.rusher.kraken.service.KrakenServiceImpl;
+import com.rusher.kraken.utils.Constant;
 import com.rusher.okcoin.dto.Funds;
 import com.rusher.okcoin.dto.OKCoinAsset;
+import com.rusher.okcoin.dto.OKCoinTicker;
 import com.rusher.okcoin.service.OKCoinService;
 import com.rusher.ws.WebServiceRequestMessage;
 import com.rusher.ws.WebServiceRequestProcessService;
 import com.rusher.yunbi.dto.Account;
 import com.rusher.yunbi.dto.AccountAsset;
+import com.rusher.yunbi.dto.YunBiTicker;
 import com.rusher.yunbi.service.YunBiService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +35,8 @@ import java.util.List;
  * Author: Liam
  * Date: 2017/8/23
  */
-@Service("assetProcessService")
-public class AssetProcessService implements WebServiceRequestProcessService<AssetResponse, Object> {
+@Service("jiachadataProcessService")
+public class JiachaDataProcessService implements WebServiceRequestProcessService<JiaChaDataResponse, Object> {
     private final Log logger = LogFactory.getLog("ERR_LOG");
     @Autowired
     private KrakenServiceImpl krakenService;
@@ -38,20 +47,36 @@ public class AssetProcessService implements WebServiceRequestProcessService<Asse
     @Autowired
     private YunBiService yunBiService;
 
+    @Autowired
+    private SystemSettingService systemSettingService;
+
+    @Autowired
+    private APIAuthService APIAuthService;
+
+    @Autowired
+    @Qualifier("okCoinTicker2TickerTranslator")
+    private TranslatorEx okCoinTicker2TickerTranslator;
+
+    @Autowired
+    @Qualifier("yunBiTicker2Ticker")
+    private TranslatorEx yunBiTicker2Ticker;
+
     @Override
-    public Object processPost(AssetResponse response, WebServiceRequestMessage message) {
+    public Object processPost(JiaChaDataResponse response, WebServiceRequestMessage message) {
         OKCoinAsset okCoinAsset = okCoinService.getAsset(new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
+
         return null;
     }
 
     @Override
     public Object processGet() {
-        OKCoinAsset okCoinAsset = okCoinService.getAsset(
-                new Authorization("14d0881c-68b8-4de7-8ef5-b2140ba2780c", "0440198DB0B9D02BBF0F240AB220208A"));
-
-        Account yunbiAccount = yunBiService.getAccount(
-                new Authorization("WNfHT5nDEtcJ9rfEJRxWQBk5bPJF55VM9AvIkgDt", "v6OZDWIxj1NDYRS5HPESyp1FJl640j97IUlBXXSt"));
-        return createAssetResponse(okCoinAsset, yunbiAccount);
+        OKCoinTicker okCoinTicker = okCoinService.getTicker(Currency.ETH);
+        YunBiTicker yunBiTicker = yunBiService.getTicker(Currency.ETH);
+        KrakenTicker krakenTicker = krakenService.getTicker(Constant.CurrencyAndSymbolMap.get(Currency.ETH));
+        SystemSetting systemSetting = systemSettingService.getSystemSetting();
+//        APIAuth apiAuth=APIAuthService.getAPIAuth(Platform.KRAKEN);
+        AlgorithmSupportJiaCha.getHighestBuy();
+        return null;
     }
 
     private AssetResponse createAssetResponse(OKCoinAsset okCoinAsset, Account yunbiAccount) {

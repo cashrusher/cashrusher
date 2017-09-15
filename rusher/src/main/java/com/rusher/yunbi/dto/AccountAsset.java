@@ -7,7 +7,6 @@ import com.alibaba.fastjson.annotation.JSONField;
  */
 public class AccountAsset {
 
-
     @JSONField(name = "currency")
     private String currency;
 

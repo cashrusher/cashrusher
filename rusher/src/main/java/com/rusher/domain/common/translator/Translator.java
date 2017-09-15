@@ -1,4 +1,4 @@
-package com.rusher.interfaces.ws.translator;
+package com.rusher.domain.common.translator;
 
 public interface Translator<S, D> {
 

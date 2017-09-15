@@ -1,8 +1,9 @@
-package com.rusher.interfaces.ws.translator;
+package com.rusher.kraken.translator;
 
 import com.google.common.collect.Lists;
 import com.rusher.Currency;
 import com.rusher.Platform;
+import com.rusher.domain.common.translator.TranslatorTri;
 import com.rusher.interfaces.dto.BuySellCurrency;
 import com.rusher.interfaces.dto.Error;
 import com.rusher.interfaces.dto.Ticker;
@@ -10,6 +11,7 @@ import com.rusher.interfaces.model.db.SystemSetting;
 import com.rusher.interfaces.ws.exception.UnsupportCurrencyException;
 import com.rusher.kraken.dto.KrakenTicker;
 import com.rusher.kraken.dto.Pairs;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.Map;
  *
  * The default Currency of Kraken is USD
  */
+@Component("krakenTicker2TickerTranslator")
 public class KrakenTicker2TickerTranslator implements TranslatorTri<KrakenTicker, SystemSetting, Pairs, Ticker> {
 
   @Override

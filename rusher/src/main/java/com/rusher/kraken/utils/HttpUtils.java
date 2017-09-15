@@ -16,29 +16,32 @@ import static com.rusher.kraken.utils.Signature.createSignature;
  */
 public class HttpUtils {
 
-    public static String queryPrivate(String key, String secret, String urlPath, Map<String, String> values) throws Exception {
-        byte[] secretDecode = Base64.decodeBase64(secret);
-        values.put("nonce", String.valueOf(System.currentTimeMillis() * 1000000));
-        String signature = createSignature(urlPath, values, secretDecode);
-        String content = post(APIURL + urlPath, values, key, signature);
-        return content;
-    }
+  public static String queryPrivate(String key, String secret, String urlPath, Map<String, String> values) throws Exception {
+    byte[] secretDecode = Base64.decodeBase64(secret);
+    values.put("nonce", String.valueOf(System.currentTimeMillis() * 1000000));
+    String signature = createSignature(urlPath, values, secretDecode);
+    return post(APIURL + urlPath, values, key, signature);
+  }
 
-    public static String post(String url, Map<String, String> params, String key, String signature) {
-        // 构造参数签名
-        Map<String, String> header = new HashMap<String, String>();
-        header.put("API-Key", key);
-        header.put("API-Sign", signature);
+  public static String queryPublic(String urlPath, Map<String, String> values) {
+    return post(APIURL + urlPath, values, null, null);
+  }
 
-        // 发送post请求
-        HttpUtilManager httpUtil = HttpUtilManager.getInstance();
-        try {
-            return httpUtil.requestHttpPost(url, params, header);
-        } catch (HttpException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+  public static String post(String url, Map<String, String> params, String key, String signature) {
+    // 构造参数签名
+    Map<String, String> header = new HashMap<String, String>();
+    header.put("API-Key", key);
+    header.put("API-Sign", signature);
+
+    // 发送post请求
+    HttpUtilManager httpUtil = HttpUtilManager.getInstance();
+    try {
+      return httpUtil.requestHttpPost(url, params, header);
+    } catch (HttpException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return null;
+  }
 }

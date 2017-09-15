@@ -24,8 +24,8 @@ public class YunBiService {
     private AuthorizationKey getAuthorizationKey(String accessKey, String secretKey) {
         AuthorizationKey authorizationKey = new AuthorizationKey();
         authorizationKey.setId(1L);
-        authorizationKey.setAccessKey(accessKey); //
-        authorizationKey.setSecretKey(secretKey); //
+        authorizationKey.setAccessKey(accessKey);
+        authorizationKey.setSecretKey(secretKey);
         return authorizationKey;
     }
 

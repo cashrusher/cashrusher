@@ -1,4 +1,4 @@
-package com.rusher.interfaces.ws.service;
+package com.rusher.interfaces.ws.endpoint;
 
 import com.rusher.Authorization;
 import com.rusher.Platform;

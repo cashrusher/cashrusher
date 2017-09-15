@@ -3,6 +3,9 @@ package com.rusher.interfaces.ws.support;
 import com.rusher.interfaces.dto.Error;
 import com.rusher.interfaces.dto.ErrorResponse;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import static com.rusher.interfaces.dto.Status.Failed;
 
 /**
@@ -21,5 +24,11 @@ public class ErrorResponseSupport {
         error.setCode(code);
         error.setMessage(message);
         return error;
+    }
+
+    public static String getStackTrace(Exception e) {
+        StringWriter stringWriter = new StringWriter();
+        e.printStackTrace(new PrintWriter(stringWriter));
+        return stringWriter.toString();
     }
 }

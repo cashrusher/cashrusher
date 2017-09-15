@@ -1,15 +1,17 @@
-package com.rusher.interfaces.ws.translator;
+package com.rusher.okcoin.translator;
 
 import com.google.common.collect.Lists;
 import com.rusher.Currency;
 import com.rusher.Platform;
+import com.rusher.domain.common.translator.TranslatorEx;
 import com.rusher.interfaces.dto.BuySellCurrency;
 import com.rusher.interfaces.dto.Error;
 import com.rusher.interfaces.dto.Ticker;
 import com.rusher.interfaces.model.Constant;
 import com.rusher.interfaces.model.db.SystemSetting;
 import com.rusher.interfaces.ws.exception.UnsupportCurrencyException;
-import com.rusher.yunbi.dto.YunBiTicker;
+import com.rusher.okcoin.dto.OKCoinTicker;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
@@ -17,32 +19,33 @@ import java.util.List;
 /**
  * Author: Liam
  * Date: 2017/9/14
- *
- * The default currency of Yunbi is CNY.
+ * <p>
+ * The default currency for OKCoin is CNY
  */
-public class YunBiTicker2Ticker implements TranslatorEx<YunBiTicker, SystemSetting, Ticker> {
+@Component("okCoinTicker2TickerTranslator")
+public class OKCoinTicker2TickerTranslator implements TranslatorEx<OKCoinTicker, SystemSetting, Ticker> {
 
   @Override
-  public Ticker translate(YunBiTicker source, SystemSetting systemSetting) {
+  public Ticker translate(OKCoinTicker source, SystemSetting systemSetting) {
     Ticker ticker = new Ticker();
     if (source == null) {
-      ticker.setError(new Error(Constant.SYSTEM, "Can not get YunBi Ticker"));
+      ticker.setError(new Error(Constant.SYSTEM, "Can not get OKCoin Ticker"));
       return ticker;
     }
     ticker.setDate(new Date());
-    ticker.setPlatform(Platform.YUNBI);
+    ticker.setPlatform(Platform.OKCOIN);
     ticker.setBuySellCurrencies(createBuySellCurrencies(source, systemSetting));
     return ticker;
   }
 
-  private List<BuySellCurrency> createBuySellCurrencies(YunBiTicker source, SystemSetting systemSetting) {
+  private List<BuySellCurrency> createBuySellCurrencies(OKCoinTicker source, SystemSetting systemSetting) {
     List<BuySellCurrency> buySellCurrencies = Lists.newArrayList();
     buySellCurrencies.add(createBuySellCurrency(source, systemSetting.getCnyusd(), Currency.USD));
     buySellCurrencies.add(createBuySellCurrency(source, systemSetting.getCnyusd(), Currency.CNY));
     return buySellCurrencies;
   }
 
-  private BuySellCurrency createBuySellCurrency(YunBiTicker source, double CNY2USDRatio, Currency currency) {
+  private BuySellCurrency createBuySellCurrency(OKCoinTicker source, double CNY2USDRatio, Currency currency) {
     BuySellCurrency buySellCurrency = new BuySellCurrency();
     switch (currency) {
       case CNY:
